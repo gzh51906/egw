@@ -24,12 +24,15 @@
         </div>
       </div>
     </div>
-    <ul class="card-view">
-      <li>
-        <!-- <img src="../assets/user_order_01.png" alt=""> -->
-        <div class="item-name">待收货</div>
+    <ul class="card-view" v-for="item in cardlist" :key="item.title">
+      <li v-for="type in item" :key="type.srcImg">
+        <img :src="type.srcImg" alt="">
+        <div class="item-name">{{type.title}}</div>
       </li>
     </ul>
+    <div class="guess-you-like">
+      <img src="../assets/guess_you_like.jpg" alt="">
+    </div>
   </div>
 </template>
 <script>
@@ -40,7 +43,55 @@ export default {
         icon: "el-icon-setting",
         srcUrl: require("../assets/not_user.jpg"),
         title: "我的"
-      }
+      },
+      cardlist:[
+        [{
+          title:"待收货",
+          srcImg:require("../assets/user_order_01.png"),
+        },{
+          title:"代付款",
+          srcImg:require("../assets/user_order_05.png")
+        },{
+          title:"已完成",
+          srcImg:require("../assets/user_order_03.png")
+        },{
+          title:"已取消",
+          srcImg:require("../assets/user_order_04.png")
+        },{
+          title:"全部订单",
+          srcImg:require("../assets/user_two_05.png")
+        }],[{
+          title:"我的卡劵",
+          srcImg:require("../assets/user_two_01.png")
+        },{
+          title:"我的宅配",
+          srcImg:require("../assets/user_two_02.png")
+        },{
+          title:"我的收藏",
+          srcImg:require("../assets/user_two_03.png")
+        },{
+          title:"我的余额",
+          srcImg:require("../assets/user_two_04.png")
+        },{
+          title:"优惠券",
+          srcImg:require("../assets/user_two_05.png")
+        }],[{
+          title:"收货地址",
+          srcImg:require("../assets/user_third_02.png")
+        },{
+          title:"绑定手机",
+          srcImg:require("../assets/user_third_03.png")
+        },{
+          title:"修改密码",
+          srcImg:require("../assets/user_third_04.png")
+        },{
+          title:"修改邮箱",
+          srcImg:require("../assets/user_third_05.png")
+        },{
+          title:"在线客服",
+          srcImg:require("../assets/service.png")
+        }]
+      ]
     };
   }
 };
@@ -160,17 +211,33 @@ body {
 }
 .card-view li {
   width: 20%;
-  min-height:  75.5px;
+  height:  75.5px;
   /* height: 4.690625rem; */
   text-align: center;
+  padding: 10px 0;
 }
 .card-view>li>img{
     width: 39.58px;
     height: 39.58px;
+        vertical-align: middle;
 }
 .card-view .item-name{
     color: #282828;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 21px;
+}
+/* 猜你喜欢 */
+.guess-you-like{
+    width: 100%;
+    max-width: 100%;
+    background-color: #fefbfb;
+}
+img{
+      max-width: 100%;
+    vertical-align: middle;
+}
+/* 猜你喜欢 */
+.guess-you-like>img{
+
 }
 </style>
