@@ -3,6 +3,9 @@ import Classify from '../pages/Classify.vue'
 import Card from '../pages/Card.vue'
 import Cart from '../pages/Cart.vue'
 import User from '../pages/User.vue'
+import Reg from '../pages/Reg.vue'
+import Login from '../pages/Login.vue'
+
 
 import Hot from "../Home/Hot.vue"
 import Fruit from "../Home/Fruit.vue"
@@ -31,47 +34,47 @@ let router = new VueRouter({
         path: '/home',
         component: Home,
         children: [{
-                name: "hot",
-                path: "hot",
-                component: Hot
-            },
-            {
-                name: "fruit",
-                path: "fruit",
-                component: Fruit
-            }, {
-                name: "green",
-                path: "green",
-                component: Green
-            }, {
-                name: "oil",
-                path: "oil",
-                component: Oil
-            }, {
-                name: "ganhuo",
-                path: "ganhuo",
-                component: Ganhuo
-            }, {
-                name: "snacks",
-                path: "snacks",
-                component: Snacks
-            }, {
-                name: "mincha",
-                path: "mincha",
-                component: Mincha
-            }, {
-                name: "cardli",
-                path: "cardli",
-                component: Cardli
-            }, {
-                name: "chuwei",
-                path: "chuwei",
-                component: Chuwei
-            }, {
-                name: "jiadian",
-                path: "jiadian",
-                component: Jiadian
-            }
+            name: "hot",
+            path: "hot",
+            component: Hot
+        },
+        {
+            name: "fruit",
+            path: "fruit",
+            component: Fruit
+        }, {
+            name: "green",
+            path: "green",
+            component: Green
+        }, {
+            name: "oil",
+            path: "oil",
+            component: Oil
+        }, {
+            name: "ganhuo",
+            path: "ganhuo",
+            component: Ganhuo
+        }, {
+            name: "snacks",
+            path: "snacks",
+            component: Snacks
+        }, {
+            name: "mincha",
+            path: "mincha",
+            component: Mincha
+        }, {
+            name: "cardli",
+            path: "cardli",
+            component: Cardli
+        }, {
+            name: "chuwei",
+            path: "chuwei",
+            component: Chuwei
+        }, {
+            name: "jiadian",
+            path: "jiadian",
+            component: Jiadian
+        }
         ]
     }, {
         name: 'classify',
@@ -85,6 +88,14 @@ let router = new VueRouter({
         name: 'cart',
         path: '/cart',
         component: Cart
+    }, {
+        name: "reg",
+        path: "/reg",
+        component: Reg
+    }, {
+        name: "login",
+        path: "/login",
+        component: Login
     }, {
         name: 'user',
         path: '/user',

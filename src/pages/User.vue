@@ -18,7 +18,7 @@
       <img class="wrap-img" src="../assets/user_bg.png" alt />
       <div class="user-ht">
         <img :src="topNav.srcUrl" alt />
-        <div class="user-t">
+        <div class="user-t" @click="goto('login')">
           <div class="user-t-top">下午好</div>
           <div class="user-t-botm">点击登录/注册用户</div>
         </div>
@@ -93,6 +93,11 @@ export default {
         }]
       ]
     };
+  },
+  methods:{
+    goto(path){
+      this.$router.push({path})
+    }
   }
 };
 </script>
