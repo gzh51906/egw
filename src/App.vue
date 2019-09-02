@@ -2,7 +2,8 @@
   <div id="app">
     <router-view></router-view>
     <footer class="footer">
-      <el-menu :default-active="active" class="el-menu-demo" router mode="horizontal" @select="changeActive" active-text-color="#f00">
+      <el-menu :default-active="active" class="el-menu-demo" 
+      router mode="horizontal" @select="changeActive" active-text-color="#f00">
         <el-menu-item :index="item.path" v-for="item in menu" :key="item.name">
           <i :class="item.font"></i>
           <p class="type">{{item.text}}</p>
@@ -62,6 +63,11 @@ export default {
     changeActive(index) {
       this.active = index;
     }
+  },
+  created(){
+    console.log(this.$route.path);
+    
+    this.active = this.$route.path;
   }
 };
 </script>
