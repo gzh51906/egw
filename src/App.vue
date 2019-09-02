@@ -62,6 +62,9 @@ export default {
     changeActive(index) {
       this.active = index;
     }
+  },
+  created() {
+    this.active = this.$route.path;
   }
 };
 </script>
