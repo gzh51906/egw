@@ -1,16 +1,20 @@
 <template>
-    <div class="home">
-        <header class="header">
-            <el-menu :default-active="active" class="el-menu-demo" router mode="horizontal">
-                <el-menu-item :index="item.path" v-for="item in topType" :key="item.ty_id">
-                    <p class="type">{{item.title}}</p>
-                </el-menu-item>
-            </el-menu>
-        </header>
-        <div class="main">
-            <router-view></router-view>
-        </div>
+  <div class="home">
+    <header class="header">
+      <el-menu :default-active="active" class="el-menu-demo" router mode="horizontal">
+        <el-menu-item :index="item.path" v-for="item in topType" :key="item.ty_id">
+          <!-- <el-menu-item v-for="item in topType" :key="item.ty_id"> -->
+          <p class="type">{{item.title}}</p>
+        </el-menu-item>
+      </el-menu>
+      <div class="serch">
+        <el-button round icon="el-icon-search">搜索</el-button>
+      </div>
+    </header>
+    <div class="main">
+      <router-view></router-view>
     </div>
+  </div>
 </template>
 
 <script>
@@ -43,22 +47,30 @@ export default {
   methods: {
     changeActive(index) {
       this.active = index;
-    },
+    } /* ,
     goto() {
-      this.$router.push({ path: "/home/hot" });
-    }
+      this.$router.push({ path: "home/hot" });
+    } */
+  },
+  created() {
+    this.active = this.$route.path;
+  },
+  beforeRouteUpdate(to, from, next) {
+    let { path } = to.matched;
+    this.$router.push({ path });
+    console.log(to, from);
+    next();
   }
 };
 </script>
 <style lang="scss">
-.main {
-  margin-top: 50px;
-}
 .home .header {
+  z-index: 10;
   position: fixed;
   top: 0;
   width: 100%;
   height: 38px;
+  background: #fff;
   .el-menu-demo {
     height: 100%;
     display: flex;
@@ -77,6 +89,32 @@ export default {
     .is-active .type {
       border-bottom: 2px solid #f44;
     }
+  }
+  .serch {
+    margin-top: 0;
+    background: #fff;
+    width: 100%;
+    height: 38.5px;
+    padding: 4px 10px;
+    box-sizing: border-box;
+    .el-button {
+      width: 100%;
+      padding: 0;
+      height: 100%;
+      border: none;
+      background: #eee;
+      text-align: left;
+      text-indent: 6px;
+      font-size: 12px;
+      color: #999;
+    }
+  }
+}
+.home {
+  width: 100%;
+  .main {
+    margin-top: 78px;
+    width: 100%;
   }
 }
 </style>
