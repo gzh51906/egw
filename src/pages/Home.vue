@@ -108,6 +108,7 @@ export default {
   .main {
     margin-top: 78px;
     width: 100%;
+    margin-bottom: 60px;
   }
 }
 </style>

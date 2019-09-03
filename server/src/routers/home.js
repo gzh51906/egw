@@ -32,4 +32,16 @@ Router.get("/icon2", async (req, res) => {
     res.send(data)
 })
 
+/* 查询小banner */
+Router.get("/small", async (req, res) => {
+    let data = await find("home_smallb", {});
+    res.send(data)
+})
+
+/* 查询时令热销 */
+Router.get("/hotlist", async (req, res) => {
+    let data = await find("home_hotlist", {});
+    res.send(data)
+})
+
 module.exports = Router;
