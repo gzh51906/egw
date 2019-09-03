@@ -19,7 +19,8 @@ import ElementUI from "element-ui";
 Vue.use(ElementUI);
 
 import "element-ui/lib/theme-chalk/index.css";
-
+import { InfiniteScroll } from 'mint-ui';
+Vue.use(InfiniteScroll)
 export default {
   name: "app",
   data() {
