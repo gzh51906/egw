@@ -130,10 +130,12 @@ export default {
   methods: {
     goto(path) {
       this.$router.push({ path });
+      
     },
     load() {
       this.count += 1;
     },
+    
      async getData() {
       //  let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {
       //  })

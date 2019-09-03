@@ -1,7 +1,7 @@
 <template>
   <div class="user-login">
     <header class="nav nav-t">
-      <div class="nav-l">
+      <div class="nav-l" @click="previous">
         <i class="el-icon-arrow-left"></i>
       </div>
       <div class="nav-title">
@@ -17,9 +17,10 @@
         </div>
       </div>
     </header>
-    <div class="content mlogin">
-      <input type="text" placeholder="请输入手机号" />
-      <input class="reg-pasw" type="text" placeholder="请输入6位以上的密码" />
+    <div class="content mlogin" ref="ruleFrom">
+      <input type="text" placeholder="请输入手机号" class="reg-phone" v-model="regphone" />
+      <div class="errmas">手机号不通过</div>
+      <div class="yanzhen" @click="getPhone">点击验证</div>
     </div>
   </div>
 </template>
@@ -28,6 +29,7 @@
 export default {
   data() {
     return {
+      regphone: "",
       check: false,
       menulist: [
         {
@@ -60,11 +62,15 @@ export default {
     },
     changdata2() {
       return (this.check = false);
+    },
+    previous() {
+      this.$router.go(-1);
+      // console.log(this.previousRouter);
+    },
+    getPhone() {
+
     }
-  },
-  beforeRouteUpdate(to,from,next){
-      console.log("111",from);
-      next();
+
   }
 };
 </script>
@@ -161,7 +167,7 @@ body {
   /* padding-top: 25px; */
   width: 100%;
 }
-.mlogin input {
+.mlogin .reg-phone {
   width: 100%;
   background: #fff;
   padding: 10px;
@@ -169,7 +175,25 @@ body {
   color: #666;
   margin-top: 10%;
 }
-.reg-pasw{
+/* .reg-pasw{
     margin-bottom: 400px;
+} */
+.yanzhen {
+  width: 100%;
+  height: 43.75px;
+  margin-top: 5%;
+  background-color: #ffac0a;
+  border: 0.0625rem solid #ffac0a;
+  text-align: center;
+  line-height: 43.75px;
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 400px;
+}
+.errmas {
+  /* display: none; */
+  color: red;
+  font-size: 12px;
+  margin-top: 13px;
 }
 </style>

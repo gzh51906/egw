@@ -1,7 +1,7 @@
 <template>
   <div class="user-login" >
     <header class="nav nav-t">
-      <div class="nav-l">
+      <div class="nav-l" @click="previous">
         <i class="el-icon-arrow-left"></i>
       </div>
       <div class="nav-title">
@@ -17,9 +17,10 @@
         </div>
       </div>
     </header>
-    <div class="content mlogin">
-      <input type="text" placeholder="请输入用户名/手机号/邮箱" />
-      <input type="text" placeholder="请输入6位以上的密码" />
+    <div class="content mlogin" ref="ruleFrom">
+      <input type="text" placeholder="请输入用户名/手机号/邮箱"  v-model="ruleFrom.username"/>
+      <input type="text" placeholder="请输入6位以上的密码" v-model="ruleFrom.userPassword"/>
+      <div class="hint">请输入登录密码，长度大于等于6位</div>
       <button class="van-button">立即登录</button>
       <div class="log-reg">
         <div class="log-reg-left" @click="goto('reg')">手机快速注册</div>
@@ -33,7 +34,12 @@
 export default {
     data(){
         return{
+          ruleFrom:{
+            username:'',
+            userPassword:''
+          },
             check:false,
+            previousRouter:'',
             menulist:[
                 {
                     name:'首页',
@@ -60,12 +66,17 @@ export default {
     changdata() {
       return (this.check = !this.check);
       console.log(this.check);
+      
     },
     changdata2() {
       return (this.check = false);
     },
     goto(path){
       this.$router.push(path)
+    },
+    previous(){
+     this.$router.go(-1)
+      // console.log(this.previousRouter);
     }
   }
 };
@@ -195,5 +206,10 @@ body {
 .log-reg .log-reg-right{
   text-align: right;
   color: #fd7400;
+}
+.mlogin .hint{
+    color: red;
+    font-size: 12px;
+    margin-top: 13px;
 }
 </style>
