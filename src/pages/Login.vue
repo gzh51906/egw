@@ -17,6 +17,15 @@
         </div>
       </div>
     </header>
+    <div class="content mlogin">
+      <input type="text" placeholder="请输入用户名/手机号/邮箱" />
+      <input type="text" placeholder="请输入6位以上的密码" />
+      <button class="van-button">立即登录</button>
+      <div class="log-reg">
+        <div class="log-reg-left" @click="goto('reg')">手机快速注册</div>
+        <div class="log-reg-right">忘记密码</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,26 +53,34 @@ export default {
                 },
             ]
         }
+
     },
-    methods:{
-        changdata(){
-            
-            return this.check = !this.check
-            
-            console.log(this.check);
-            
-        },
-        changdata2(){
-            return this.check = false
-        }
+
+  methods: {
+    changdata() {
+      return (this.check = !this.check);
+      console.log(this.check);
+    },
+    changdata2() {
+      return (this.check = false);
+    },
+    goto(path){
+      this.$router.push(path)
     }
+  }
 };
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
+body {
+}
 .user-login {
   width: 100%;
   height: 100%;
+  background-color: #f0f2f5;
 }
 .nav {
   width: 100%;
@@ -75,23 +92,24 @@ export default {
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 33px;
+  height: 38.5px;
   box-shadow: 0 1px 2px #ccc;
+  background: #fff;
 }
 .nav-title {
   color: #444;
-  font-size: 14px;
+  font-size: 16px;
   flex: 1;
   text-align: center;
-  line-height: 33px;
+  line-height: 38.5px;
 }
 .nav-l,
 .nav-r {
   position: relative;
   width: 33px;
-  height: 33px;
+  height: 100%;
   text-align: center;
-  line-height: 33px;
+  line-height: 38.5px;
   font-size: 14px;
 }
 .user-login .nav-l,
@@ -100,8 +118,8 @@ export default {
 }
 .user-login .nav-l,
 .nav-r i {
-  font-size: 18px;
-  line-height: 33px;
+  font-size: 22px;
+  line-height: 38.5px;
 }
 .user-login .nav-t .van-popup2 {
   position: relative;
@@ -137,5 +155,45 @@ export default {
 
 .menu i{
     padding-left: 10px;
+}
+.mlogin {
+  padding-left: 6%;
+  padding-right: 6%;
+}
+.content {
+  /* padding-top: 25px; */
+  width: 100%;
+}
+.mlogin input {
+  width: 100%;
+  background: #fff;
+  padding: 10px;
+  font-size: 14px;
+  color: #666;
+  margin-top: 10%;
+}
+.van-button {
+  width: 100%;
+  height: 43.75px;
+  margin-top: 10%;
+  background-color: #ffac0a;
+  border: 0.0625rem solid #ffac0a;
+  text-align: center;
+  line-height: 43.75px;
+  font-size: 14px;
+  color: #fff;
+}
+.log-reg{
+  margin-top: 40px;
+  margin-bottom: 400px;
+  display:flex;
+}
+.log-reg div{
+  flex: 1;
+  color: #666;
+}
+.log-reg .log-reg-right{
+  text-align: right;
+  color: #fd7400;
 }
 </style>
