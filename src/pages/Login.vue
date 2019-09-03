@@ -1,5 +1,5 @@
 <template>
-  <div class="user-login">
+  <div class="user-login" >
     <header class="nav nav-t">
       <div class="nav-l">
         <i class="el-icon-arrow-left"></i>
@@ -7,7 +7,7 @@
       <div class="nav-title">
         <span>用户登录</span>
       </div>
-      <div class="nav-r" @click="changdata">
+      <div class="nav-r"  @click="changdata">
         <i class="el-icon-more"></i>
       </div>
       <div class="menu van-popup2" v-show="check">
@@ -22,43 +22,41 @@
 
 <script>
 export default {
-  data() {
-    return {
-      check: false,
-      menulist: [
-        {
-          name: "首页",
-          icon: "el-icon-house"
-        },
-        {
-          name: "分类",
-          icon: "el-icon-menu"
-        },
-        {
-          name: "宅配",
-          icon: "el-icon-present"
-        },
-        {
-          name: "购物车",
-          icon: "el-icon-shopping-cart-2"
-        },
-        {
-          name: "我的",
-          icon: "el-icon-user"
+    data(){
+        return{
+            check:false,
+            menulist:[
+                {
+                    name:'首页',
+                    icon:'el-icon-house'
+                },{
+                    name:'分类',
+                    icon:'el-icon-menu'
+                },{
+                    name:'宅配',
+                    icon:'el-icon-present'
+                },{
+                    name:'购物车',
+                    icon:'el-icon-shopping-cart-2'
+                },{
+                    name:'我的',
+                    icon:'el-icon-user'
+                },
+            ]
         }
-      ]
-    };
-  },
-  methods: {
-    changdata() {
-      return (this.check = !this.check);
-
-      console.log(this.check);
     },
-    changdata2() {
-      return (this.check = false);
+    methods:{
+        changdata(){
+            
+            return this.check = !this.check
+            
+            console.log(this.check);
+            
+        },
+        changdata2(){
+            return this.check = false
+        }
     }
-  }
 };
 </script>
 
@@ -98,7 +96,7 @@ export default {
 }
 .user-login .nav-l,
 .nav-r {
-  z-index: 200;
+    z-index:200;
 }
 .user-login .nav-l,
 .nav-r i {
@@ -133,10 +131,11 @@ export default {
 }
 .menu > div:nth-child(-n + 5) {
   border-bottom: 1.1px solid #eee;
-  height: 33.81px;
+    height: 33.81px;
+
 }
 
-.menu i {
-  padding-left: 10px;
+.menu i{
+    padding-left: 10px;
 }
 </style>

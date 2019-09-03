@@ -71,13 +71,16 @@ export default {
         height: 100%;
         line-height: 38px;
         box-sizing: border-box;
+        font-size: 12px;
+        color: #555;
       }
     }
-    .is-active {
-      border: none;
-    }
-    .is-active .type {
-      border-bottom: 2px solid #f44;
+    .el-menu-item:hover {
+      background: none;
+      border-bottom: 2px solid #f00;
+      .type {
+        color: #444;
+      }
     }
   }
   .serch {

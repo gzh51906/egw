@@ -26,24 +26,13 @@
     </div>
     <ul class="card-view" v-for="item in cardlist" :key="item.title">
       <li v-for="type in item" :key="type.srcImg">
-        <img :src="type.srcImg" alt />
+        <img :src="type.srcImg" alt="">
         <div class="item-name">{{type.title}}</div>
       </li>
     </ul>
     <div class="guess-you-like">
-      <img src="../assets/guess_you_like.jpg" alt />
-      <div class="gul-list">
-        <div @click="getData">
-          <img src="../assets/38cc30a9a5714f2da36c47adb0f76d77.jpg" alt />
-          <div class="goods-name ellipsis">asdasdasdasdasdasdasdasdasd</div>
-          <div class="price-cart">
-            <i class="goods-price">199.0</i>
-            <i class="icon icon-add-cart el-icon-shopping-cart-1"></i>
-          </div>
-        </div>
-      </div>
+      <img src="../assets/guess_you_like.jpg" alt="">
     </div>
-    <!-- 数据滚动 -->
   </div>
 </template>
 <script>
@@ -55,116 +44,59 @@ export default {
         srcUrl: require("../assets/not_user.jpg"),
         title: "我的"
       },
-      cardlist: [
-        [
-          {
-            title: "待收货",
-            srcImg: require("../assets/user_order_01.png")
-          },
-          {
-            title: "代付款",
-            srcImg: require("../assets/user_order_05.png")
-          },
-          {
-            title: "已完成",
-            srcImg: require("../assets/user_order_03.png")
-          },
-          {
-            title: "已取消",
-            srcImg: require("../assets/user_order_04.png")
-          },
-          {
-            title: "全部订单",
-            srcImg: require("../assets/user_two_05.png")
-          }
-        ],
-        [
-          {
-            title: "我的卡劵",
-            srcImg: require("../assets/user_two_01.png")
-          },
-          {
-            title: "我的宅配",
-            srcImg: require("../assets/user_two_02.png")
-          },
-          {
-            title: "我的收藏",
-            srcImg: require("../assets/user_two_03.png")
-          },
-          {
-            title: "我的余额",
-            srcImg: require("../assets/user_two_04.png")
-          },
-          {
-            title: "优惠券",
-            srcImg: require("../assets/user_two_05.png")
-          }
-        ],
-        [
-          {
-            title: "收货地址",
-            srcImg: require("../assets/user_third_02.png")
-          },
-          {
-            title: "绑定手机",
-            srcImg: require("../assets/user_third_03.png")
-          },
-          {
-            title: "修改密码",
-            srcImg: require("../assets/user_third_04.png")
-          },
-          {
-            title: "修改邮箱",
-            srcImg: require("../assets/user_third_05.png")
-          },
-          {
-            title: "在线客服",
-            srcImg: require("../assets/service.png")
-          }
-        ]
-      ],
-      count: 0
+      cardlist:[
+        [{
+          title:"待收货",
+          srcImg:require("../assets/user_order_01.png"),
+        },{
+          title:"代付款",
+          srcImg:require("../assets/user_order_05.png")
+        },{
+          title:"已完成",
+          srcImg:require("../assets/user_order_03.png")
+        },{
+          title:"已取消",
+          srcImg:require("../assets/user_order_04.png")
+        },{
+          title:"全部订单",
+          srcImg:require("../assets/user_two_05.png")
+        }],[{
+          title:"我的卡劵",
+          srcImg:require("../assets/user_two_01.png")
+        },{
+          title:"我的宅配",
+          srcImg:require("../assets/user_two_02.png")
+        },{
+          title:"我的收藏",
+          srcImg:require("../assets/user_two_03.png")
+        },{
+          title:"我的余额",
+          srcImg:require("../assets/user_two_04.png")
+        },{
+          title:"优惠券",
+          srcImg:require("../assets/user_two_05.png")
+        }],[{
+          title:"收货地址",
+          srcImg:require("../assets/user_third_02.png")
+        },{
+          title:"绑定手机",
+          srcImg:require("../assets/user_third_03.png")
+        },{
+          title:"修改密码",
+          srcImg:require("../assets/user_third_04.png")
+        },{
+          title:"修改邮箱",
+          srcImg:require("../assets/user_third_05.png")
+        },{
+          title:"在线客服",
+          srcImg:require("../assets/service.png")
+        }]
+      ]
     };
   },
-  methods: {
-    goto(path) {
-      this.$router.push({ path });
-    },
-    load() {
-      this.count += 1;
-    },
-    getData() {
-      //  let data =   axios.get('http://api.egu365.cn/goods/list', {
-      //     params: {
-      //       // 参数
-      //       sorts: {hits,asc},
-      //       pageNo:1
-      //     }
-      // });
-      // console.log(data);
-
-      // axios里面有XMLHTTPRequired和Promise的ajax请求
-
-
-      this.$axios
-        .get("https://api.sharkshopping.com/ec/api", {
-          params: {
-            // 参数 ?method=b2c.index.get_ad_data&appid=webapp&version=4.0.4&token=&source=wap&type=2
-            method: "b2c.index.get_ad_data",
-            appid: "webapp",
-            version: "4.0.4",
-            token: "",
-            source: "wap",
-            type: 2
-          }
-        })
-        .then(item => {
-          // console.log(data.returndata);
-          console.log(item);
-
-          // this.recommend = data.datas[1].goods.item.slice(0, 4);
-        });
-      // 52.78.186.217:8888/user/list
+  methods:{
+    goto(path){
+      this.$router.push({path})
     }
   }
 };
@@ -183,17 +115,14 @@ body {
 }
 .user .user-head {
   z-index: 3;
+
   position: fixed;
   width: 100%;
-  height: 0.9rem;
+  height: 0.88rem;
   /* background: #6e6565; */
   /* border-bottom: 1px solid #000; */
   box-shadow: 0 1px 2px #ccc;
   display: flex;
-  background: #fff;
-}
-.user-head-c span {
-  font-size: 14px;
 }
 .user .user-head .user-head-l {
   position: relative;
@@ -222,7 +151,7 @@ body {
   position: relative;
   width: 298px;
   height: 100%;
-  /* line-height: 33px; */
+  line-height: 33px;
   text-align: center;
   font-size: 16px;
 }
@@ -234,6 +163,7 @@ body {
   width: 38.5px;
   height: 100%;
   font-size: 20px;
+  line-height: 33px;
   text-align: center;
 }
 /* user 登录 /注册 */
@@ -255,11 +185,11 @@ body {
   top: calc(55% - 0.836665rem);
   left: 0;
   /* padding-left: 0.655175rem; */
-  padding-left: 17px;
+  padding-left: 17px
 }
 .user-wrap .user-ht img {
-  width: 62.73px;
-  height: 62.73px;
+  width:62.73px;
+  height:62.73px;
   border-radius: 50%;
 }
 .user-wrap .user-t {
@@ -281,89 +211,38 @@ body {
   background-color: #fafafa;
   /* background: #999; */
   /* border-radius: 0.0625rem; */
-  border-radius: 1px;
+  border-radius:1px;
   box-shadow: 0 2px 2px rgba(207, 207, 207, 0.3);
 }
 .card-view li {
   width: 20%;
-  height: 75.5px;
+  height:  75.5px;
   /* height: 4.690625rem; */
   text-align: center;
   padding: 10px 0;
 }
-.card-view > li > img {
-  width: 39.58px;
-  height: 39.58px;
-  vertical-align: middle;
+.card-view>li>img{
+    width: 39.58px;
+    height: 39.58px;
+        vertical-align: middle;
 }
-.card-view .item-name {
-  color: #282828;
-  font-size: 12px;
-  line-height: 21px;
-}
-/* 猜你喜欢 */
-.guess-you-like {
-  width: 100%;
-  max-width: 100%;
-  background-color: #fefbfb;
-}
-img {
-  max-width: 100%;
-  vertical-align: middle;
+.card-view .item-name{
+    color: #282828;
+    font-size: 12px;
+    line-height: 21px;
 }
 /* 猜你喜欢 */
-.guess-you-like > img {
+.guess-you-like{
+    width: 100%;
+    max-width: 100%;
+    background-color: #fefbfb;
 }
-.gul-list {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  margin-bottom: 100px;
+img{
+      max-width: 100%;
+    vertical-align: middle;
 }
-.gul-list > div {
-  width: calc(50% - 13px);
-  margin-left: 8.8px;
-  margin-top: 7.8px;
-  background-color: rgb(204, 202, 206);
-  float: left;
-}
+/* 猜你喜欢 */
+.guess-you-like>img{
 
-.goods-name {
-  height: 25.2px;
-  line-height: 28.8px;
-  font-size: 14.4px;
-  padding: 0 9.5px;
-  color: #373737;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
-.price-cart {
-  display: flex;
-  padding: 6.4px 0 5.4px 5.5px;
-}
-.goods-price {
-  color: red;
-  font-size: 14px;
-  flex: 1;
-}
-i {
-  font: inherit;
-}
-.goods-price::before {
-  content: "\FFE5";
-}
-.icon-add-cart {
-  width: 21px;
-  height: 21px;
-  border-radius: 50%;
-  background: red;
-  margin-right: 10px;
-  line-height: 21px;
-  color: #fff;
-  text-align: center;
-}
-/* .icon-add-cart:before {
-    content: "el-icon-shopping-cart-2";
-} */
 </style>

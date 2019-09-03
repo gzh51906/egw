@@ -34,47 +34,47 @@ let router = new VueRouter({
         path: '/home',
         component: Home,
         children: [{
-            name: "hot",
-            path: "hot",
-            component: Hot
-        },
-        {
-            name: "fruit",
-            path: "fruit",
-            component: Fruit
-        }, {
-            name: "green",
-            path: "green",
-            component: Green
-        }, {
-            name: "oil",
-            path: "oil",
-            component: Oil
-        }, {
-            name: "ganhuo",
-            path: "ganhuo",
-            component: Ganhuo
-        }, {
-            name: "snacks",
-            path: "snacks",
-            component: Snacks
-        }, {
-            name: "mincha",
-            path: "mincha",
-            component: Mincha
-        }, {
-            name: "cardli",
-            path: "cardli",
-            component: Cardli
-        }, {
-            name: "chuwei",
-            path: "chuwei",
-            component: Chuwei
-        }, {
-            name: "jiadian",
-            path: "jiadian",
-            component: Jiadian
-        }
+                name: "hot",
+                path: "hot",
+                component: Hot
+            },
+            {
+                name: "fruit",
+                path: "fruit",
+                component: Fruit
+            }, {
+                name: "green",
+                path: "green",
+                component: Green
+            }, {
+                name: "oil",
+                path: "oil",
+                component: Oil
+            }, {
+                name: "ganhuo",
+                path: "ganhuo",
+                component: Ganhuo
+            }, {
+                name: "snacks",
+                path: "snacks",
+                component: Snacks
+            }, {
+                name: "mincha",
+                path: "mincha",
+                component: Mincha
+            }, {
+                name: "cardli",
+                path: "cardli",
+                component: Cardli
+            }, {
+                name: "chuwei",
+                path: "chuwei",
+                component: Chuwei
+            }, {
+                name: "jiadian",
+                path: "jiadian",
+                component: Jiadian
+            }
         ]
     }, {
         name: 'classify',
