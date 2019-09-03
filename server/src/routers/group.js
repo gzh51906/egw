@@ -16,7 +16,7 @@ const {
 
 /* 查询首页轮播图 */
 Router.get("/list", async (req, res) => {
-    let data = await find("user_list", {});
+    let data = await find("group_list", {});
     res.send(data)
 })
 
