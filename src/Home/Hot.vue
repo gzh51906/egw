@@ -1,40 +1,42 @@
 <template>
-    <div class="hot">
-        <div class="block">
-            <el-carousel height="152px">
-                <el-carousel-item v-for="item in bannerData" :key="item.id">
-                    <img :src="item.img">
-                </el-carousel-item>
-            </el-carousel>
-        </div>
-        <ul class="icon-one">
-            <li class="icon" v-for="item in icon1" :key="item.id"><img :src="item.img">
-                <p class="title">{{item.name}}</p>
-            </li>
-        </ul>
-        <ul class="icon-two">
-            <li class="icon" v-for="item in icon2" :key="item.tid"><img :src="item.timage">
-                <p class="title">{{item.tname}}</p>
-            </li>
-            <router-link tag="li" to="/genre/list" class="icon">
-                <div class="classify-img">
-                    <img src="http://oss.egu365.com/upload/mobile-all-categories.jpg" />
-                </div>
-                <p class="classify-txt title">全部分类</p>
-            </router-link>
-        </ul>
-        <div class="search">
-            <div class="port">
-                <span>依谷</span>
-                <span>头条</span>
-            </div>
-            <el-carousel height="20px" direction="vertical" :autoplay="true" indicator-position="none">
-                <el-carousel-item v-for="item in 3" :key="item">
-                    <h3 class="medium">{{ item }}</h3>
-                </el-carousel-item>
-            </el-carousel>
-        </div>
+  <div class="hot">
+    <div class="block">
+      <el-carousel height="152px">
+        <el-carousel-item v-for="item in bannerData" :key="item.id">
+          <img :src="item.img">
+        </el-carousel-item>
+      </el-carousel>
     </div>
+    <ul class="icon-one">
+      <li class="icon" v-for="item in icon1" :key="item.id"><img :src="item.img">
+        <p class="title">{{item.name}}</p>
+      </li>
+    </ul>
+    <ul class="icon-two">
+      <li class="icon" v-for="item in icon2" :key="item.tid"><img :src="item.timage">
+        <p class="title">{{item.tname}}</p>
+      </li>
+      <router-link tag="li" to="/genre/list" class="icon">
+        <div class="classify-img">
+          <img src="http://oss.egu365.com/upload/mobile-all-categories.jpg" />
+        </div>
+        <p class="classify-txt title">全部分类</p>
+      </router-link>
+    </ul>
+    <div class="search">
+      <div class="content">
+        <div class="port">
+          <span>依谷</span>
+          <span>头条</span>
+        </div>
+        <el-carousel height="20px" direction="vertical" :autoplay="true" indicator-position="none">
+          <el-carousel-item v-for="item in info" :key="item">
+            <h3 class="medium">{{ item }}</h3>
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -42,30 +44,32 @@ export default {
     return {
       bannerData: [],
       icon1: [],
-      icon2: []
+      icon2: [],
+      info: [
+        "1、你好！欢迎来到依谷网！",
+        "2、你要的这里都有！come on",
+        "3、竭诚为您服务，你就是上帝"
+      ]
     };
   },
   created() {
     // console.log(this.$axios);
     /* 轮播图 */
-    this.$axios.get("http://localhost:8888/home/01", {}).then(({ data }) => {
+    this.$axios.get(`${this.$url}/home/01`, {}).then(({ data }) => {
       this.bannerData = data[0].list;
     });
     /* 第一行icon */
-    this.$axios.get("http://localhost:8888/home/icon1", {}).then(({ data }) => {
+    this.$axios.get(`${this.$url}/home/icon1`, {}).then(({ data }) => {
       this.icon1 = data[0].list;
     });
     /* 第二行icon */
-    this.$axios.get("http://localhost:8888/home/icon2", {}).then(({ data }) => {
+    this.$axios.get(`${this.$url}/home/icon2`, {}).then(({ data }) => {
       this.icon2 = data[0].list;
     });
   }
 };
 </script>
 <style lang="scss" scoped>
-.el-carousel__item {
-  background: #58bc58;
-}
 .hot {
   .block {
     width: 100%;
@@ -113,6 +117,32 @@ export default {
         height: 51.18px;
         display: block;
         margin-bottom: 2px;
+      }
+    }
+  }
+  .search {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    padding: 8.2px 12px;
+    .content {
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      padding: 0 4px;
+      .port {
+        float: left;
+        margin-right: 6px;
+        line-height: 22px;
+        span:nth-child(1) {
+          font-weight: bold;
+          color: #58bc58;
+        }
+      }
+      .el-carousel {
+        .medium {
+          margin-left: 6px;
+          line-height: 22px;
+        }
       }
     }
   }
