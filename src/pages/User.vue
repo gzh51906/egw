@@ -33,11 +33,11 @@
     <div class="guess-you-like">
       <img src="../assets/guess_you_like.jpg" alt />
       <div class="gul-list">
-        <div @click="getData">
-          <img src="../assets/38cc30a9a5714f2da36c47adb0f76d77.jpg" alt />
-          <div class="goods-name ellipsis">asdasdasdasdasdasdasdasdasd</div>
+        <div @click="getData" v-for="item in dataitem" :key="item.id">
+          <img :src="item.bigImg" alt />
+          <div class="goods-name ellipsis">{{item.goodsName}}</div>
           <div class="price-cart">
-            <i class="goods-price">199.0</i>
+            <i class="goods-price">{{item.mallPrice}}</i>
             <i class="icon icon-add-cart el-icon-shopping-cart-1"></i>
           </div>
         </div>
@@ -123,7 +123,8 @@ export default {
           }
         ]
       ],
-      count: 0
+      count: 0,
+      dataitem: []
     };
   },
   methods: {
@@ -133,39 +134,39 @@ export default {
     load() {
       this.count += 1;
     },
-    getData() {
-      //  let data =   axios.get('http://api.egu365.cn/goods/list', {
-      //     params: {
-      //       // 参数
-      //       sorts: {hits,asc},
-      //       pageNo:1
-      //     }
+     async getData() {
+      //  let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {
+      //  })
+      // console.log(data);
+      // this.dataitem = data
+      // console.log('111',this.dataitem);
+      
+      // axios里面有XMLHTTPRequired和Promise的ajax请求
+      // this.$axios.get("http://52.78.186.217:8888/user/list", {
+      // }).then(( {data} ) => {
+      //   console.log(data);
+      // });
+
+      // let data = await this.$axios.get("52.78.186.217:8888/user/list", {
+      //   // params: {
+      //   //   // 参数 ?method=b2c.index.get_ad_data&appid=webapp&version=4.0.4&token=&source=wap&type=2
+      //   //   method: "b2c.index.get_ad_data",
+      //   //   appid: "webapp",
+      //   //   version: "4.0.4",
+      //   //   token: "",
+      //   //   source: "wap",
+      //   //   type: 2
+      //   // }
       // });
       // console.log(data);
-
-      // axios里面有XMLHTTPRequired和Promise的ajax请求
-
-
-      this.$axios
-        .get("https://api.sharkshopping.com/ec/api", {
-          params: {
-            // 参数 ?method=b2c.index.get_ad_data&appid=webapp&version=4.0.4&token=&source=wap&type=2
-            method: "b2c.index.get_ad_data",
-            appid: "webapp",
-            version: "4.0.4",
-            token: "",
-            source: "wap",
-            type: 2
-          }
-        })
-        .then(item => {
-          // console.log(data.returndata);
-          console.log(item);
-
-          // this.recommend = data.datas[1].goods.item.slice(0, 4);
-        });
+      // this.dataitem =
       // 52.78.186.217:8888/user/list
     }
+  },
+  async created(){
+    let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {});
+    this.dataitem = data[0].list
+    console.log(this.dataitem );
   }
 };
 </script>
@@ -324,7 +325,7 @@ img {
   width: calc(50% - 13px);
   margin-left: 8.8px;
   margin-top: 7.8px;
-  background-color: rgb(204, 202, 206);
+  background-color: #fff;
   float: left;
 }
 
@@ -337,6 +338,7 @@ img {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-size: 12px;
 }
 .price-cart {
   display: flex;
