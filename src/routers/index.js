@@ -74,6 +74,13 @@ let router = new VueRouter({
                 name: "jiadian",
                 path: "jiadian",
                 component: Jiadian
+            }, {
+                // 默认跳转到首页
+                path: "/home",
+                redirect: {
+                    name: "hot",
+                    component: Hot
+                }
             }
         ]
     }, {
@@ -104,7 +111,8 @@ let router = new VueRouter({
         // 默认跳转到首页
         path: "/",
         redirect: {
-            name: "home"
+            name: "hot",
+            component: Hot
         }
     }]
 })

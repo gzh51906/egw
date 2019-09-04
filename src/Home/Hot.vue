@@ -50,11 +50,11 @@
         <div class="early-goods-wrap">
           <img src="../assets/new.png" class="new">
           <img src="../assets/strawberry.png" class="stra">
-          <div data-v-5c154bec="" class="early-goods-head">
-            <div data-v-5c154bec="" class="early-head-title">
+          <div class="early-goods-head">
+            <div class="early-head-title">
               {{newlist.name}}
             </div>
-            <div data-v-5c154bec="" class="early-head-desc">{{newlist.state}}</div>
+            <div class="early-head-desc">{{newlist.state}}</div>
             <ul class="early-goods-list">
               <li class="list" v-for="item in newlist.bcPublishedGoodsEos" :key="item.goodsId"><img :src="item.bseGoodsEo.goodsImg">
                 <p class="tit">{{item.goodsName}}</p>
@@ -66,7 +66,38 @@
     </div>
     <div class="sell-well">
       <img :src="hotlist.bgImg1" class="bg">
-
+      <div class="early-goods-wrap">
+        <img src="../assets/top_sale.png" class="top">
+        <div class="early-goods-head">
+          <div class="early-head-title">
+            {{hotlist.name}}
+          </div>
+          <div class="early-head-desc">{{hotlist.state}}</div>
+          <ul class="early-goods-list">
+            <li class="list" v-for="item in hotlist.bcPublishedGoodsEos" :key="item.goodsId"><img :src="item.bseGoodsEo.goodsImg">
+              <p class="tit">{{item.goodsName}}</p>
+              <p class="price">￥{{item.mallPrice}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="goods">
+      <img src="../assets/today.jpg" class="today">
+      <div class="list" v-for="(item,index) in goodsbg" :key="index">
+        <img :src="item.bgImg1" class="list_bg">
+        <div class="list_content">
+          <p class="list_more">查看更多>></p>
+          <ul class="list_ul">
+            <li class="list_li" v-for="it in goodslist[index].list" :key="it.goodsId">
+              <!-- {{it}} -->
+              <img :src="it.bseGoodsEo.goodsImg" class="list_op">
+              <p class="cont">{{it.goodsName}} </p>
+              <div class="price">￥{{it.mallPrice}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -84,7 +115,9 @@ export default {
       ],
       smallbanner: [],
       newlist: {},
-      hotlist: {}
+      hotlist: {},
+      goodsbg: [],
+      goodslist: []
     };
   },
   created() {
@@ -111,7 +144,18 @@ export default {
       .then(({ data }) => {
         this.newlist = data[0].obj;
         this.hotlist = data[0].obj1;
-        console.log(this.newlist);
+      });
+    /* 商品楼层背景&标题 */
+    this.$axios
+      .get(`http://localhost:8888/home/goodsbg`, {})
+      .then(({ data }) => {
+        this.goodsbg = data[0].list;
+      });
+    /* 商品楼层内容 */
+    this.$axios
+      .get(`http://localhost:8888/home/goodsli`, {})
+      .then(({ data }) => {
+        this.goodslist = data;
       });
   }
 };
@@ -259,6 +303,8 @@ export default {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 width: 70px;
+                font-size: 12px;
+                color: #555;
               }
             }
           }
@@ -269,9 +315,114 @@ export default {
   .sell-well {
     width: 100%;
     height: 200px;
+    position: relative;
     .bg {
       width: 100%;
       height: 100%;
+    }
+    .early-goods-wrap {
+      position: absolute;
+      bottom: 10px;
+      width: 365px;
+      height: 173px;
+      background: #fff;
+      margin: 0 5px;
+      border-radius: 4px;
+      .top {
+        width: 44px;
+      }
+      .early-goods-head {
+        height: 50px;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        .early-head-title {
+          color: #f00;
+          font-size: 16px;
+          line-height: 30px;
+        }
+        .early-goods-list {
+          margin-top: 6px;
+          display: flex;
+          .list {
+            width: 29%;
+            padding: 0 6px;
+            .tit {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              width: 100%;
+              font-size: 12px;
+              color: #555;
+            }
+            .price {
+              font-size: 13px;
+              color: #f00;
+            }
+            img {
+              width: 76%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .goods {
+    .today {
+      width: 100%;
+      display: block;
+    }
+    .list {
+      position: relative;
+      .list_bg {
+        width: 100%;
+        display: block;
+      }
+      .list_content {
+        position: absolute;
+        top: 50px;
+        // background: #42e32f;
+        width: 100%;
+        .list_more {
+          font-size: 10px;
+          color: #fff;
+          text-align: center;
+          width: 100%;
+        }
+        .list_ul {
+          width: 100%;
+          display: flex;
+          margin-top: 10px;
+          overflow: auto;
+          .list_li {
+            width: 117px;
+            background: #fff;
+            margin-left: 6px;
+            padding: 6px 6px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            .list_op {
+              width: 110px;
+            }
+            .cont {
+              color: #555;
+              font-size: 12px;
+              line-height: 24px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              width: 110px;
+            }
+            .price {
+              color: #f00;
+              font-size: 14px;
+              text-align: center;
+              line-height: 26px;
+            }
+          }
+        }
+      }
     }
   }
 }
