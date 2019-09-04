@@ -24,14 +24,7 @@
     </div>-->
     <!-- rules：验证规则 -->
     <!-- ruleForm：表单数据最终会写在这里 -->
-    <el-form
-      :model="ruleForm"
-      status-icon
-      :rules="rules"
-      ref="regForm"
-      label-width="100px"
-      class="demo-ruleForm"
-    >
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="regForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="用户名" prop="username">
         <el-input type="text" v-model="ruleForm.username"></el-input>
       </el-form-item>
@@ -119,7 +112,7 @@ export default {
   methods: {
     changdata() {
       return (this.check = !this.check);
-      console.log(this.check);
+      // console.log(this.check);
     },
     changdata2() {
       return (this.check = false);
@@ -139,7 +132,7 @@ export default {
             });
           this.$router.push("/login");
         } else {
-          console.log("error submit!!");
+          // console.log("error submit!!");
           return false;
         }
       });
