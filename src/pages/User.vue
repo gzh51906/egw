@@ -130,25 +130,22 @@ export default {
   methods: {
     goto(path) {
       this.$router.push({ path });
-      
     },
     load() {
       this.count += 1;
     },
-    
-     async getData() {
+
+    async getData() {
       //  let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {
       //  })
       // console.log(data);
       // this.dataitem = data
       // console.log('111',this.dataitem);
-      
       // axios里面有XMLHTTPRequired和Promise的ajax请求
       // this.$axios.get("http://52.78.186.217:8888/user/list", {
       // }).then(( {data} ) => {
       //   console.log(data);
       // });
-
       // let data = await this.$axios.get("52.78.186.217:8888/user/list", {
       //   // params: {
       //   //   // 参数 ?method=b2c.index.get_ad_data&appid=webapp&version=4.0.4&token=&source=wap&type=2
@@ -165,10 +162,13 @@ export default {
       // 52.78.186.217:8888/user/list
     }
   },
-  async created(){
-    let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {});
-    this.dataitem = data[0].list
-    console.log(this.dataitem );
+  async created() {
+    let { data } = await this.$axios.get(
+      "http://52.78.186.217:8888/user/list",
+      {}
+    );
+    this.dataitem = data[0].list;
+    // console.log(this.dataitem );
   }
 };
 </script>

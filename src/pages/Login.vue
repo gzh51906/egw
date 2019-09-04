@@ -1,5 +1,5 @@
 <template>
-  <div class="user-login" >
+  <div class="user-login">
     <header class="nav nav-t">
       <div class="nav-l" @click="previous">
         <i class="el-icon-arrow-left"></i>
@@ -7,7 +7,7 @@
       <div class="nav-title">
         <span>用户登录</span>
       </div>
-      <div class="nav-r"  @click="changdata">
+      <div class="nav-r" @click="changdata">
         <i class="el-icon-more"></i>
       </div>
       <div class="menu van-popup2" v-show="check">
@@ -18,8 +18,8 @@
       </div>
     </header>
     <div class="content mlogin" ref="ruleFrom">
-      <input type="text" placeholder="请输入用户名/手机号/邮箱"  v-model="ruleFrom.username"/>
-      <input type="text" placeholder="请输入6位以上的密码" v-model="ruleFrom.userPassword"/>
+      <input type="text" placeholder="请输入用户名/手机号/邮箱" v-model="ruleFrom.username" />
+      <input type="text" placeholder="请输入6位以上的密码" v-model="ruleFrom.userPassword" />
       <div class="hint">请输入登录密码，长度大于等于6位</div>
       <button class="van-button">立即登录</button>
       <div class="log-reg">
@@ -32,51 +32,51 @@
 
 <script>
 export default {
-    data(){
-        return{
-          ruleFrom:{
-            username:'',
-            userPassword:''
-          },
-            check:false,
-            previousRouter:'',
-            menulist:[
-                {
-                    name:'首页',
-                    icon:'el-icon-house'
-                },{
-                    name:'分类',
-                    icon:'el-icon-menu'
-                },{
-                    name:'宅配',
-                    icon:'el-icon-present'
-                },{
-                    name:'购物车',
-                    icon:'el-icon-shopping-cart-2'
-                },{
-                    name:'我的',
-                    icon:'el-icon-user'
-                },
-            ]
+  data() {
+    return {
+      ruleFrom: {
+        username: "",
+        userPassword: ""
+      },
+      check: false,
+      previousRouter: "",
+      menulist: [
+        {
+          name: "首页",
+          icon: "el-icon-house"
+        },
+        {
+          name: "分类",
+          icon: "el-icon-menu"
+        },
+        {
+          name: "宅配",
+          icon: "el-icon-present"
+        },
+        {
+          name: "购物车",
+          icon: "el-icon-shopping-cart-2"
+        },
+        {
+          name: "我的",
+          icon: "el-icon-user"
         }
-
-    },
+      ]
+    };
+  },
 
   methods: {
     changdata() {
       return (this.check = !this.check);
-      console.log(this.check);
-      
     },
     changdata2() {
       return (this.check = false);
     },
-    goto(path){
-      this.$router.push(path)
+    goto(path) {
+      this.$router.push(path);
     },
-    previous(){
-     this.$router.go(-1)
-      // console.log(this.previousRouter);
+    previous() {
+      this.$router.go(-1);
     }
   }
 };
@@ -125,7 +125,7 @@ body {
 }
 .user-login .nav-l,
 .nav-r {
-    z-index:200;
+  z-index: 200;
 }
 .user-login .nav-l,
 .nav-r i {
@@ -160,12 +160,11 @@ body {
 }
 .menu > div:nth-child(-n + 5) {
   border-bottom: 1.1px solid #eee;
-    height: 33.81px;
-
+  height: 33.81px;
 }
 
-.menu i{
-    padding-left: 10px;
+.menu i {
+  padding-left: 10px;
 }
 .mlogin {
   padding-left: 6%;
@@ -194,22 +193,22 @@ body {
   font-size: 14px;
   color: #fff;
 }
-.log-reg{
+.log-reg {
   margin-top: 40px;
   margin-bottom: 400px;
-  display:flex;
+  display: flex;
 }
-.log-reg div{
+.log-reg div {
   flex: 1;
   color: #666;
 }
-.log-reg .log-reg-right{
+.log-reg .log-reg-right {
   text-align: right;
   color: #fd7400;
 }
-.mlogin .hint{
-    color: red;
-    font-size: 12px;
-    margin-top: 13px;
+.mlogin .hint {
+  color: red;
+  font-size: 12px;
+  margin-top: 13px;
 }
 </style>

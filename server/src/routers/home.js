@@ -44,16 +44,44 @@ Router.get("/hotlist", async (req, res) => {
     res.send(data)
 })
 
-/* 查询楼成图背景&标题 */
-Router.get("/goodsbg", async (req, res) => {
-    let data = await find("home_goodsbg", {});
-    res.send(data)
-})
-
 /* 查询楼成图内容 */
 Router.get("/goodsli", async (req, res) => {
     let data = await find("home_goodsli", {});
     res.send(data)
+})
+
+/* 查询楼成图背景&标题 */
+Router.get("/goodsbg", async (req, res) => {
+    let data = await find("home_goodsbgt", {});
+    res.send(data)
+})
+
+/* 通过ID查询楼成图背景&标题 */
+Router.get("/goodsbgt", async (req, res) => {
+    let {
+        id
+    } = req.query;
+    id = parseInt(id); //默认拿到的都是字符串要转换成数字
+    let data
+    try {
+        data = await find("home_goodsbgt", {
+            id
+        });
+        data = data[0];
+        if (data) {
+            res.send(formData({
+                data
+            }));
+        } else {
+            res.send(formData({
+                code: 0
+            }));
+        }
+    } catch (err) {
+        res.send(formData({
+            code: 0
+        }));
+    }
 })
 
 module.exports = Router;

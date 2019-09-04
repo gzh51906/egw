@@ -9,9 +9,11 @@ const homeGoods = require("./goods");
 const home = require("./home");
 const user = require("./user");
 const group = require("./group");
-const userRouter = require('./reglogin')
+
 /* 利用中间件格式化请求 */
-Router.use(express.json(), express.urlencoded({extended: false}))
+Router.use(express.json(), express.urlencoded({
+    extended: false
+}))
 
 /* 设置响应头跨域请求 */
 Router.use((req, res, next) => {
@@ -32,5 +34,5 @@ Router.use("/goods", homeGoods);
 Router.use("/home", home);
 Router.use("/user", user);
 Router.use("/group", group);
-Router.use('/reg',userRouter);
+
 module.exports = Router;
