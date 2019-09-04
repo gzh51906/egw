@@ -17,17 +17,63 @@
         </div>
       </div>
     </header>
-    <div class="content mlogin" ref="ruleFrom">
+    <!-- <div class="content mlogin" ref="ruleFrom">
       <input type="text" placeholder="请输入手机号" class="reg-phone" v-model="regphone" />
       <div class="errmas">手机号不通过</div>
       <div class="yanzhen" @click="getPhone">点击验证</div>
-    </div>
+    </div>-->
+    <!-- rules：验证规则 -->
+    <!-- ruleForm：表单数据最终会写在这里 -->
+    <el-form
+      :model="ruleForm"
+      status-icon
+      :rules="rules"
+      ref="regForm"
+      label-width="100px"
+      class="demo-ruleForm"
+    >
+      <el-form-item label="用户名" prop="username">
+        <el-input type="text" v-model="ruleForm.username"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="pass">
+        <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="确认密码" prop="checkPass">
+        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+      </el-form-item>
+
+      <el-form-item class="btn2">
+        <el-button type="primary" @click="gotoReg">注册</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
+import { async } from "q";
 export default {
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.ruleForm.checkPass !== "") {
+          this.$refs.regForm.validateField("checkPass");
+        }
+        callback();
+      }
+    };
+    var checkPass = (rule, value, callback) => {
+      if (value === "") {
+        // 效验失败，需要往回调函数传入一个对象
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        // 验证通过
+        callback();
+      }
+    };
     return {
       regphone: "",
       check: false,
@@ -52,7 +98,23 @@ export default {
           name: "我的",
           icon: "el-icon-user"
         }
-      ]
+      ],
+      ruleForm: {
+        username: "",
+        pass: "",
+        checkPass: ""
+      },
+      rules: {
+        pass: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { validator: validatePass, trigger: "blur" }
+        ],
+        checkPass: [{ validator: checkPass, trigger: "blur" }],
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 3, max: 10, message: "长度在 3 到 10 个字符", trigger: "blur" }
+        ]
+      }
     };
   },
   methods: {
@@ -67,10 +129,23 @@ export default {
       this.$router.go(-1);
       // console.log(this.previousRouter);
     },
-    getPhone() {
+    gotoReg() {
+      this.$refs["regForm"].validate(async valid => {
+        if (valid) {
+          let { data } = await this.$axios.post(
+            "http://localhost:8888/user/reg",
+            {
+              username: this.ruleForm.username,
+              password: this.ruleForm.pass
+            });
 
+          this.$router.push("/login");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     }
-
   }
 };
 </script>
@@ -195,5 +270,12 @@ body {
   color: red;
   font-size: 12px;
   margin-top: 13px;
+}
+.btn2 {
+  margin-bottom: 400px;
+}
+.demo-ruleForm {
+  margin-top: 30px;
+  margin-right: 10px;
 }
 </style>
