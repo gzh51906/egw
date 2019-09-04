@@ -44,4 +44,16 @@ Router.get("/hotlist", async (req, res) => {
     res.send(data)
 })
 
+/* 查询楼成图背景&标题 */
+Router.get("/goodsbg", async (req, res) => {
+    let data = await find("home_goodsbg", {});
+    res.send(data)
+})
+
+/* 查询楼成图内容 */
+Router.get("/goodsli", async (req, res) => {
+    let data = await find("home_goodsli", {});
+    res.send(data)
+})
+
 module.exports = Router;
