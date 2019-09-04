@@ -86,11 +86,10 @@
       <img src="../assets/today.jpg" class="today">
       <div class="list" v-for="(item,index) in goodsbg" :key="index">
         <img :src="item.bgImg1" class="list_bg">
-        <div class="list_content">
+        <div class="list_content" v-if="goodslist[index]&&goodslist[index].list">
           <p class="list_more">查看更多>></p>
           <ul class="list_ul">
             <li class="list_li" v-for="it in goodslist[index].list" :key="it.goodsId">
-              <!-- {{it}} -->
               <img :src="it.bseGoodsEo.goodsImg" class="list_op">
               <p class="cont">{{it.goodsName}} </p>
               <div class="price">￥{{it.mallPrice}}</div>
@@ -149,13 +148,14 @@ export default {
     this.$axios
       .get(`http://localhost:8888/home/goodsbg`, {})
       .then(({ data }) => {
-        this.goodsbg = data[0].list;
+        this.goodsbg = data;
       });
     /* 商品楼层内容 */
     this.$axios
       .get(`http://localhost:8888/home/goodsli`, {})
       .then(({ data }) => {
         this.goodslist = data;
+        // console.log(this.goodslist[0].list);
       });
   }
 };

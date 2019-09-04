@@ -15,6 +15,9 @@ const url = "http://52.78.186.217:8888"
 
 Vue.prototype.$url = url;
 
+const url = "http://localhost:8888";
+Vue.prototype.$url = url;
+
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 

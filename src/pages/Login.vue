@@ -68,7 +68,6 @@ export default {
   methods: {
     changdata() {
       return (this.check = !this.check);
-      console.log(this.check);
     },
     changdata2() {
       return (this.check = false);
