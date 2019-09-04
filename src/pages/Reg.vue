@@ -43,14 +43,13 @@
       </el-form-item>
 
       <el-form-item class="btn2">
-        <el-button type="primary" @click="gotoReg">注册</el-button>
+        <el-button type="primary" @click="checkUsername">注册</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { async } from "q";
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -132,20 +131,37 @@ export default {
     gotoReg() {
       this.$refs["regForm"].validate(async valid => {
         if (valid) {
-          let { data } = await this.$axios.post(
-            "http://localhost:8888/user/reg",
+          let {username} = await this.$axios.post(
+            "http://52.78.186.217:8888/user/reg",
             {
               username: this.ruleForm.username,
               password: this.ruleForm.pass
             });
-
           this.$router.push("/login");
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+    // 检测注册用户名是否已经存在
+    async checkUsername(rule,value){
+      // 发送请求 检测
+        let {data}= await this.$axios.get('http://52.78.186.217:8888/user/check',{
+            params:{
+              // 用户输入的用户名
+              username:this.ruleForm.username
+            }
+          })
+          // code==1 如果用户名存在
+          if(data.code==1){
+            console.log('用户名已经存在');
+          }else{
+            // 否则调用gotoreg 存入数据库 跳转到登录页面
+            this.gotoReg();
+          }
     }
+     
   }
 };
 </script>
