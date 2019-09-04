@@ -18,27 +18,29 @@
       </div>-->
     </header>
     <div class="cartlist clearfix">
-      <div class="cartitem clearfix">
+      <div class="cartitem clearfix" v-for="item in cartlist" :key="item.id">
         <div class="item-check clearfix">
           <el-checkbox label name="type"></el-checkbox>
         </div>
         <div class="item-img">
-          <img src="../assets/guess_you_like.jpg" alt />
+          <img :src="item.goodsImg" alt />
         </div>
         <div class="item-info">
           <div class="item-top clearfix">
-            <div class="item-title ">
-              <span>当一个 form 元素123123123中只有一个输入框时</span>
+            <div class="item-title">
+              <span>{{item.goodsName}}</span>
             </div>
-            <div class="item-remove"><i class="el-icon-delete"></i></div>
+            <div class="item-remove">
+              <i class="el-icon-delete"></i>
+            </div>
           </div>
 
           <div class="item-spec">
-            <span class="spec-fa spec-l">1-3天发货</span>
-            <span class="spec-fa spec-r">3.8两公*4只 2.8两母*4只</span>
+            <span class="spec-fa spec-l">{{item.publishType}}-{{Number(item.publishType)+2}}天发货</span>
+            <span class="spec-fa spec-r">{{item.goodsStandard}}</span>
           </div>
           <div class="item-ps">
-            <div class="item-price">388.00</div>
+            <div class="item-price">{{item.mallPrice}}</div>
             <div class="item-num">
               <button>-</button>
               <input type="text" value="1" />
@@ -47,6 +49,16 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="total">
+      <div class="settlement">
+        <el-checkbox label="全选" name="type"></el-checkbox>
+      </div>
+      <div class="checkAll">
+        <span class="allPrice">{{totalPrice}}</span>
+        <span>合计：</span>
+      </div>
+      <div class="totalbtn">去结算</div>
     </div>
   </div>
 </template>
@@ -62,6 +74,9 @@ export default {
   computed: {
     cartlist() {
       return this.$store.state.cartlist;
+    },
+    totalPrice(){
+      return this.$store.getters.totalPrice
     }
   },
   created() {
@@ -190,5 +205,50 @@ export default {
   float: left;
   margin-left: 2px;
   color: red;
+}
+.total {
+  width: 100%;
+  height: 43px;
+  border: 1px solid #555;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+}
+.settlement {
+  float: left;
+  margin: 0 0 0 10px;
+  height: 100%;
+  text-align: center;
+  line-height: 43px;
+}
+.checkAll {
+  width: 56%;
+  float: left;
+  height: 100%;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 43px;
+}
+.checkAll span {
+  float: right;
+  font-size: 14px;
+}
+.allPrice{
+  color: red;
+}
+.allPrice:before {
+  content: "￥";
+  font-size: 12.8px;
+}
+.totalbtn{
+  float: left;
+  height: 100%;
+  background: red;
+  color: #fff;
+  width: 92px;
+  text-align: center;
+  line-height: 43px;
+  font-size: 14px;
 }
 </style>

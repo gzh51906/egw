@@ -32,13 +32,14 @@
     </ul>
     <div class="guess-you-like">
       <img src="../assets/guess_you_like.jpg" alt />
+      <!-- 列表 -->
       <div class="gul-list">
         <div @click="getData" v-for="item in dataitem" :key="item.id">
           <img :src="item.bigImg" alt />
           <div class="goods-name ellipsis">{{item.goodsName}}</div>
           <div class="price-cart">
             <i class="goods-price">{{item.mallPrice}}</i>
-            <i class="icon icon-add-cart el-icon-shopping-cart-1"></i>
+            <i class="icon icon-add-cart el-icon-shopping-cart-1" @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id)"></i>
           </div>
         </div>
       </div>
@@ -123,8 +124,11 @@ export default {
           }
         ]
       ],
+      data:{},
       count: 0,
-      dataitem: []
+      dataitem: [],
+      addcartdata:[],
+      adddata:{}
     };
   },
   methods: {
@@ -163,12 +167,27 @@ export default {
       // console.log(data);
       // this.dataitem =
       // 52.78.186.217:8888/user/list
+    },
+    addcart(goodsImg,goodsName,mallPrice,goodsStandard,id){
+      // console.log(goodsName)
+      // console.log('何启维',this.dataitem);
+      this.adddata = {goodsImg,goodsName,mallPrice,goodsStandard,id}
+      let add = {goodsImg,goodsName,mallPrice,goodsStandard,id}
+      console.log(add);
+      
+      // let {goodsImg,goodsName,mallPrice,goodsStandard,id} = this.addcartdata
+      // this.addcartdata.push(this.adddata)
+      // console.log(this.addcartdata);
+      
+      // console.log('何启维',goodsImg,goodsName,mallPrice,goodsStandard,id);
+      
+      this.$store.commit('addItem',{goodsImg,goodsName,mallPrice,goodsStandard,id})
     }
   },
   async created(){
     let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {});
     this.dataitem = data[0].list
-    console.log(this.dataitem );
+    // console.log(this.dataitem );
   }
 };
 </script>
