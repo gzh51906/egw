@@ -68,3 +68,18 @@ exports.find = async (colName, query = {}, {
 
     return data;
 }
+
+// 增
+exports.insert = async (colName, data) => {
+    /* 连接数据库 */
+    let {
+        client,
+        db
+    } = await connect();
+    /* 使用一个集合 */
+    let collection = db.collection(colName);
+    let result = await collection.insertOne(data);
+    // 查询结束后关闭客户端连接，释放资源
+    client.close();
+    return result;
+}

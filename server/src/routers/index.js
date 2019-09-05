@@ -6,6 +6,9 @@ const Router = express.Router();
 
 /* 引入路由文件 */
 const homeGoods = require("./goods");
+const home = require("./home");
+const user = require("./user");
+const group = require("./group");
 
 /* 利用中间件格式化请求 */
 Router.use(express.json(), express.urlencoded({
@@ -28,5 +31,8 @@ Router.use((req, res, next) => {
 
 /* 配置路由接口 */
 Router.use("/goods", homeGoods);
+Router.use("/home", home);
+Router.use("/user", user);
+Router.use("/group", group);
 
 module.exports = Router;

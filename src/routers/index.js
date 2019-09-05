@@ -3,6 +3,9 @@ import Classify from '../pages/Classify.vue'
 import Card from '../pages/Card.vue'
 import Cart from '../pages/Cart.vue'
 import User from '../pages/User.vue'
+import Reg from '../pages/Reg.vue'
+import Login from '../pages/Login.vue'
+
 
 import Hot from "../Home/Hot.vue"
 import Fruit from "../Home/Fruit.vue"
@@ -71,6 +74,13 @@ let router = new VueRouter({
                 name: "jiadian",
                 path: "jiadian",
                 component: Jiadian
+            }, {
+                // 默认跳转到首页
+                path: "/home",
+                redirect: {
+                    name: "hot",
+                    component: Hot
+                }
             }
         ]
     }, {
@@ -84,7 +94,17 @@ let router = new VueRouter({
     }, {
         name: 'cart',
         path: '/cart',
-        component: Cart
+        component: Cart,
+        // 路由原信息：给路由定义一些额外的配置参数利用这个参数来确认这个路由需要什么样的权限
+        meta:{requiresAuth:true}
+    }, {
+        name: "reg",
+        path: "/reg",
+        component: Reg
+    }, {
+        name: "login",
+        path: "/login",
+        component: Login
     }, {
         name: 'user',
         path: '/user',
@@ -93,8 +113,16 @@ let router = new VueRouter({
         // 默认跳转到首页
         path: "/",
         redirect: {
-            name: "home"
+            name: "hot",
+            component: Hot
         }
     }]
+})
+router.beforeEach(function(to,from,next){
+    console.log('beforeEachaaaa',to,from);
+    if(to.meta.requiresAuth){
+        
+    }
+    next();
 })
 export default router;

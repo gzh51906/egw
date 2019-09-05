@@ -1,6 +1,17 @@
 <template>
-    <h1>厨卫</h1>
+    <div class="app">
+        <cont :msg="cent"></cont>
+    </div>
 </template>
 <script>
-export default {};
+import cont from "./Main.vue";
+export default {
+  name: "app",
+  data() {
+    return { cent: { bgurl: 103 } };
+  },
+  components: {
+    cont
+  }
+};
 </script>
