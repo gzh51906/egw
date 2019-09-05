@@ -1,5 +1,6 @@
 <template>
   <div class="user">
+    <div  v-if="btnFlag" class="go-top el-icon-arrow-up" @click="backTop"></div>
     <!-- TopNav -->
     <header class="user-head">
       <div class="user-head-l">
@@ -34,12 +35,15 @@
       <img src="../assets/guess_you_like.jpg" alt />
       <!-- 列表 -->
       <div class="gul-list">
-        <div @click="getData" v-for="item in dataitem" :key="item.id">
+        <div v-for="item in dataitem" :key="item.id">
           <img :src="item.bigImg" alt />
           <div class="goods-name ellipsis">{{item.goodsName}}</div>
           <div class="price-cart">
             <i class="goods-price">{{item.mallPrice}}</i>
-            <i class="icon icon-add-cart el-icon-shopping-cart-1" @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,item.qty)"></i>
+            <i
+              class="icon icon-add-cart el-icon-shopping-cart-1"
+              @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,item.qty)"
+            ></i>
           </div>
         </div>
       </div>
@@ -51,7 +55,8 @@
 export default {
   data() {
     return {
-      qty:1,
+      btnFlag:0,
+      qty: 1,
       topNav: {
         icon: "el-icon-setting",
         srcUrl: require("../assets/not_user.jpg"),
@@ -125,11 +130,11 @@ export default {
           }
         ]
       ],
-      data:{},
+      data: {},
       count: 0,
       dataitem: [],
-      addcartdata:[],
-      adddata:{}
+      addcartdata: [],
+      adddata: {}
     };
   },
   methods: {
@@ -139,54 +144,84 @@ export default {
     load() {
       this.count += 1;
     },
-
-    async getData() {
-      //  let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {
-      //  })
-      // console.log(data);
-      // this.dataitem = data
-      // console.log('111',this.dataitem);
-      // axios里面有XMLHTTPRequired和Promise的ajax请求
-      // this.$axios.get("http://52.78.186.217:8888/user/list", {
-      // }).then(( {data} ) => {
-      //   console.log(data);
-      // });
-      // let data = await this.$axios.get("52.78.186.217:8888/user/list", {
-      //   // params: {
-      //   //   // 参数 ?method=b2c.index.get_ad_data&appid=webapp&version=4.0.4&token=&source=wap&type=2
-      //   //   method: "b2c.index.get_ad_data",
-      //   //   appid: "webapp",
-      //   //   version: "4.0.4",
-      //   //   token: "",
-      //   //   source: "wap",
-      //   //   type: 2
-      //   // }
-      // });
-      // console.log(data);
-      // this.dataitem =
-      // 52.78.186.217:8888/user/list
+    addcart(
+      goodsImg,
+      goodsName,
+      mallPrice,
+      goodsStandard,
+      id,
+      goodsBrand,
+      qty
+    ) {
+      // 判断商品是否已经存在购物车
+      // 存在改变数量
+      // 不存在改变id
+      let { cartlist } = this.$store.state;
+      var hasItem = cartlist.filter(function(item) {
+        // 得到一个空数组或者数组
+        return item.id == id;
+      })[0];
+      if (hasItem) {
+        this.$store.commit("changeQty", { id: id, qty: hasItem.qty + 1 });
+        console.log(hasItem.qty);
+      } else {
+        this.$store.commit("addItem", {
+          goodsImg,
+          goodsName,
+          mallPrice,
+          goodsStandard,
+          id,
+          goodsBrand,
+          qty: 1
+        });
+      }
     },
-    addcart(goodsImg,goodsName,mallPrice,goodsStandard,id,goodsBrand,qty){
-      // console.log(goodsName)
-      // console.log('何启维',this.dataitem);
-
-      // this.adddata = {goodsImg,goodsName,mallPrice,goodsStandard,id,goodsBrand}
-      // let add = {goodsImg,goodsName,mallPrice,goodsStandard,id,goodsBrand}
-      // console.log(add);
-      
-      // let {goodsImg,goodsName,mallPrice,goodsStandard,id} = this.addcartdata
-      // this.addcartdata.push(this.adddata)
-      // console.log(this.addcartdata);
-      
-      // console.log('何启维',goodsImg,goodsName,mallPrice,goodsStandard,id);
-      
-      this.$store.commit('addItem',{goodsImg,goodsName,mallPrice,goodsStandard,id,goodsBrand,qty:1})
+    // 回到顶部
+    backTop() {
+      const that = this;
+      let timer = setInterval(() => {
+        let ispeed = Math.floor(-that.scrollTop / 5);
+        document.documentElement.scrollTop = document.body.scrollTop =
+          that.scrollTop + ispeed;
+        if (that.scrollTop === 0) {
+          clearInterval(timer);
+        }
+      }, 16);
+    },
+    // 为了计算距离顶部的高度，当高度大于60显示回顶部图标，小于60则隐藏
+    scrollToTop() {
+      const that = this;
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      that.scrollTop = scrollTop;
+      if (that.scrollTop > 300) {
+        that.btnFlag = true;
+      } else {
+        that.btnFlag = false;
+      }
     }
   },
-  async created(){
-    let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {});
-    this.dataitem = data[0].list
-    console.log(this.dataitem );
+  async created() {
+    // let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {});
+    // this.dataitem = data[0].list
+    // console.log(this.dataitem );
+    let data2 = await this.$axios.get(
+      "http://52.78.186.217:8888/home/goodstypeo",
+      {}
+    );
+    data2.data.map(item => {
+      item.list.map(self => {
+        this.dataitem.push(self);
+      });
+    });
+  },
+  mounted() {
+    window.addEventListener("scroll", this.scrollToTop);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.scrollToTop);
   }
 };
 </script>
@@ -388,4 +423,16 @@ i {
 /* .icon-add-cart:before {
     content: "el-icon-shopping-cart-2";
 } */
+.go-top{
+color: rgb(173, 168, 168);
+font-size: 30px;
+z-index: 100;
+position: fixed;
+bottom: 60px;
+right: 10px;
+background: #fff;
+border: 1px solid rgb(173, 168, 168);
+border-radius: 50%;
+opacity:0.8;
+}
 </style>

@@ -81,12 +81,14 @@ Router.post("/login", async (req, res) => {
         password
     } = req.body;
     let data;
+
     try {
         data = await find("user", {
             username,
             password
         });
         data = data[0];
+
         if (data) {
             res.send(formData({}));
         } else {

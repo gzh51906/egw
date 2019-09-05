@@ -18,9 +18,11 @@
       </div>-->
     </header>
     <div class="cartlist clearfix">
-      <div ref="itemlen" class="cartitem clearfix" v-for="item in cartlist" :key="item.id">
-        <div class="item-check clearfix">
-          <el-checkbox label name="type"></el-checkbox>
+      <div ref="itemlen" class="cartitem clearfix" v-for="(item,index) in cartlist" :key="item.id">
+        <div   class="item-check clearfix">
+
+          <el-checkbox name="type" ></el-checkbox>
+
         </div>
         <div class="item-img">
           <img :src="item.goodsImg" alt />
@@ -30,7 +32,7 @@
             <div class="item-title">
               <span>{{item.goodsName}}</span>
             </div>
-            <div class="item-remove">
+            <div class="item-remove" @click="removeitem(index)">
               <i class="el-icon-delete"></i>
             </div>
           </div>
@@ -42,23 +44,23 @@
           <div class="item-ps">
             <div class="item-price">{{item.mallPrice}}</div>
             <div class="item-num">
-              <button class="qtyleft">-</button>
+              <button class="qtyleft" @click="qtyleft(index)">-</button>
               <input type="text" :value="item.qty" />
-              <button class="qtyright">+</button>
+              <button class="qtyright" @click="qtyright(index)">+</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="total">
-      <div class="settlement">
+      <div class="settlement" @click.stop="allele">
         <el-checkbox label="全选" name="type"></el-checkbox>
       </div>
-      <div class="checkAll">
+      <div class="checkAll" >
         <span class="allPrice">{{totalPrice}}</span>
         <span>合计：</span>
       </div>
-      <div class="totalbtn" @click="qtyright">去结算</div>
+      <div class="totalbtn">去结算</div>
     </div>
     <!-- margin值 -->
     <div class="mar_bom"></div>
@@ -69,7 +71,7 @@
 export default {
   data() {
     return {
-      num:1
+      num: 1
     };
   },
   methods: {
@@ -78,17 +80,30 @@ export default {
       this.$router.go(-1);
       // console.log(this.previousRouter);
     },
-    // 给最后一个商品添加类名
-    addclass() {
-      let index = this.$refs.itemlen.length - 1;
-      let odiv = this.$refs.itemlen[index];
+    // 全选
+    allele(e) {
+      let checkted = e.target.checked;
+      for(var i = 0; i<this.$refs.itemlen.length; i++){
+        console.log(this.$refs.itemlen[i].children[0]);
+      }
     },
-    // qty++
-    qtyright() {
-      console.log(this.$store.state);
-      
-      // console.log(this.$store.commit("changeQty"),{});
-      // return this.$store.getters.totalPrice;
+    // 数量--
+    qtyleft(index) {
+      let self = this.$store.state.cartlist[index];
+      if (self.qty == 1) {
+        return;
+      } else {
+        self.qty--;
+      }
+    },
+    // 数量++
+    qtyright(index) {
+      let self = this.$store.state.cartlist[index];
+      self.qty++;
+    },
+    // 删除
+    removeitem(index){
+      this.$store.commit('removeItem',index)
     }
   },
   computed: {
@@ -97,10 +112,10 @@ export default {
     },
     totalPrice() {
       return this.$store.getters.totalPrice;
-    },
+    }
   },
   created() {
-    console.log(this.$store);
+    // console.log('store',this.$store.state.cartlist[1].qty);
   }
 };
 </script>
@@ -124,7 +139,6 @@ export default {
 
 .cartitem {
   padding: 5px 5px 5px 0;
-  border: 1px solid #999;
   width: 100%;
   height: 100%;
 }
@@ -231,7 +245,6 @@ export default {
 .total {
   width: 100%;
   height: 43px;
-  border: 1px solid #555;
   background: #fff;
   position: fixed;
   bottom: 0;

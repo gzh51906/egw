@@ -21,7 +21,7 @@
       <input type="text" placeholder="请输入手机号" class="reg-phone" v-model="regphone" />
       <div class="errmas">手机号不通过</div>
       <div class="yanzhen" @click="getPhone">点击验证</div>
-    </div>-->
+    </div> -->
     <!-- rules：验证规则 -->
     <!-- ruleForm：表单数据最终会写在这里 -->
     <el-form :model="ruleForm" status-icon :rules="rules" ref="regForm" label-width="100px" class="demo-ruleForm">
