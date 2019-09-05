@@ -84,4 +84,36 @@ Router.get("/goodsbgt", async (req, res) => {
     }
 })
 
+/* ====== */
+Router.get("/goodstypeo", async (req, res) => {
+    let data = await find("type_goods", {});
+    res.send(data)
+})
+/* 通过ID查询分类商品信息 */
+Router.get("/goodstype", async (req, res) => {
+    let {
+        id
+    } = req.query;
+    id = parseInt(id); //默认拿到的都是字符串要转换成数字
+    let data
+    try {
+        data = await find("type_goods", {
+            id
+        });
+        data = data[0];
+        if (data) {
+            res.send(formData({
+                data
+            }));
+        } else {
+            res.send(formData({
+                code: 0
+            }));
+        }
+    } catch (err) {
+        res.send(formData({
+            code: 0
+        }));
+    }
+})
 module.exports = Router;
