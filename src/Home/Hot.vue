@@ -134,29 +134,22 @@ export default {
       this.icon2 = data[0].list;
     });
     /* smallbanner */
-    this.$axios.get(`http://localhost:8888/home/small`, {}).then(({ data }) => {
+    this.$axios.get(`${this.$url}/home/small`, {}).then(({ data }) => {
       this.smallbanner = data[0].list;
     });
     /* 时令热销 */
-    this.$axios
-      .get(`http://localhost:8888/home/hotlist`, {})
-      .then(({ data }) => {
-        this.newlist = data[0].obj;
-        this.hotlist = data[0].obj1;
-      });
+    this.$axios.get(`${this.$url}/home/hotlist`, {}).then(({ data }) => {
+      this.newlist = data[0].obj;
+      this.hotlist = data[0].obj1;
+    });
     /* 商品楼层背景&标题 */
-    this.$axios
-      .get(`http://localhost:8888/home/goodsbg`, {})
-      .then(({ data }) => {
-        this.goodsbg = data;
-      });
+    this.$axios.get(`${this.$url}/home/goodsbg`, {}).then(({ data }) => {
+      this.goodsbg = data;
+    });
     /* 商品楼层内容 */
-    this.$axios
-      .get(`http://localhost:8888/home/goodsli`, {})
-      .then(({ data }) => {
-        this.goodslist = data;
-        // console.log(this.goodslist[0].list);
-      });
+    this.$axios.get(`${this.$url}/home/goodsli`, {}).then(({ data }) => {
+      this.goodslist = data;
+    });
   }
 };
 </script>
@@ -345,8 +338,9 @@ export default {
         .early-goods-list {
           margin-top: 6px;
           display: flex;
+          justify-content: space-around;
           .list {
-            width: 29%;
+            width: 110px;
             padding: 0 6px;
             .tit {
               overflow: hidden;
