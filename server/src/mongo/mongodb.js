@@ -81,6 +81,5 @@ exports.insert = async (colName, data) => {
     let result = await collection.insertOne(data);
     // 查询结束后关闭客户端连接，释放资源
     client.close();
-    console.log(result);
     return result;
 }

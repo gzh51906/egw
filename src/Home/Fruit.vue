@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app">
     <cont :msg="cent"></cont>
   </div>
 </template>
@@ -8,7 +8,7 @@ import cont from "./Main.vue";
 export default {
   name: "app",
   data() {
-    return { cent: { bgurl: 96, goodsurl: "" } };
+    return { cent: { bgurl: 96 } };
   },
   components: {
     cont
