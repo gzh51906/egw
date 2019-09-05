@@ -5,6 +5,7 @@ import Cart from '../pages/Cart.vue'
 import User from '../pages/User.vue'
 import Reg from '../pages/Reg.vue'
 import Login from '../pages/Login.vue'
+import Goods from '../pages/Goods.vue'
 
 
 import Hot from "../Home/Hot.vue"
@@ -107,6 +108,10 @@ let router = new VueRouter({
         name: 'user',
         path: '/user',
         component: User
+    }, {
+        name: 'goods',
+        path: '/goods',
+        component: Goods
     }, {
         // 默认跳转到首页
         path: "/",
