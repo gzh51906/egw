@@ -39,7 +39,7 @@
           <div class="goods-name ellipsis">{{item.goodsName}}</div>
           <div class="price-cart">
             <i class="goods-price">{{item.mallPrice}}</i>
-            <i class="icon icon-add-cart el-icon-shopping-cart-1" @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id)"></i>
+            <i class="icon icon-add-cart el-icon-shopping-cart-1" @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,item.qty)"></i>
           </div>
         </div>
       </div>
@@ -51,6 +51,7 @@
 export default {
   data() {
     return {
+      qty:1,
       topNav: {
         icon: "el-icon-setting",
         srcUrl: require("../assets/not_user.jpg"),
@@ -165,12 +166,13 @@ export default {
       // this.dataitem =
       // 52.78.186.217:8888/user/list
     },
-    addcart(goodsImg,goodsName,mallPrice,goodsStandard,id){
+    addcart(goodsImg,goodsName,mallPrice,goodsStandard,id,goodsBrand,qty){
       // console.log(goodsName)
       // console.log('何启维',this.dataitem);
-      this.adddata = {goodsImg,goodsName,mallPrice,goodsStandard,id}
-      let add = {goodsImg,goodsName,mallPrice,goodsStandard,id}
-      console.log(add);
+
+      // this.adddata = {goodsImg,goodsName,mallPrice,goodsStandard,id,goodsBrand}
+      // let add = {goodsImg,goodsName,mallPrice,goodsStandard,id,goodsBrand}
+      // console.log(add);
       
       // let {goodsImg,goodsName,mallPrice,goodsStandard,id} = this.addcartdata
       // this.addcartdata.push(this.adddata)
@@ -178,13 +180,13 @@ export default {
       
       // console.log('何启维',goodsImg,goodsName,mallPrice,goodsStandard,id);
       
-      this.$store.commit('addItem',{goodsImg,goodsName,mallPrice,goodsStandard,id})
+      this.$store.commit('addItem',{goodsImg,goodsName,mallPrice,goodsStandard,id,goodsBrand,qty:1})
     }
   },
   async created(){
     let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {});
     this.dataitem = data[0].list
-    // console.log(this.dataitem );
+    console.log(this.dataitem );
   }
 };
 </script>

@@ -6,46 +6,41 @@ Vue.use(Vuex);
 
 let store = new Vuex.Store({
     // state 类似组件中的data
-    state:{
-        cartlist:[{
-            id:1,
-            goodsName:'iphone X',
-            goodsImg:"../assets/guess_you_like.jpg",
-            mallPrice:4999,
-            goodsStandard:'123',
-            publishType:"1",
-            qty:1
-        },{
-            id:2,
-            goodsName:'huawei mate20 plus',
-            goodsImg:"../assets/guess_you_like.jpg",
-            mallPrice:6999,
-            goodsStandard:'123',
-            publishType:"1",
-            qty:2
-        }]
+    state: {
+        cartlist: [
+            {
+                goodsBrand: "阳澄湖",
+                goodsImg: "http://oss.egu365.com/upload/38cc30a9a5714f2da36c47adb0f76d77.jpg",
+                goodsName: "【预售】2019 阳澄湖镇金秋九月黄大闸蟹299型",
+                goodsStandard: "3.3两公*3只  2.3母*3只",
+                id: "jq0i23upvu0AUsi0w1O4",
+                mallPrice: 199,
+                qty:1,
+            }
+        ]
     },
     // 更新state
-    getters:{
-        totalPrice:function(state){
-            return state.cartlist.reduce((prev,item)=>{
+    getters: {
+        totalPrice: function (state) {
+            return state.cartlist.reduce((prev, item) => {
                 return prev + item.mallPrice * item.qty
-            },0)
+            }, 0)
         }
     },
-    mutations:{
-        addItem(state,item){
-            state.carlist.push({item})
+    mutations: {
+        addItem(state, item) {
+            state.cartlist.push(item)
         },
-        removeItem(state,id){
+        // 删除
+        removeItem(state, id) {
             // 不等于id的返回true 等于id放回false
-            state.carlist = state.carlist.filter(item=>{item.goods_id!=id})
+            state.cartlist = state.cartlist.filter(item => { item.goods_id != id })
         },
-        changeQty(state,{qty,id}){
-            state.carlist = state.carlist.map(item=>{
-                if(item.goods_id === id)
-                {
-                    item.qty = qty;
+        // 改变数量
+        changeQty(state,  qty, id ) {
+            state.cartlist = state.cartlist.map(item => {
+                if (item.id === id) {
+                    item.qty= qty++;
                 }
                 return item;
             })

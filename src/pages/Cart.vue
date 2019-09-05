@@ -18,7 +18,7 @@
       </div>-->
     </header>
     <div class="cartlist clearfix">
-      <div class="cartitem clearfix" v-for="item in cartlist" :key="item.id">
+      <div ref="itemlen" class="cartitem clearfix" v-for="item in cartlist" :key="item.id">
         <div class="item-check clearfix">
           <el-checkbox label name="type"></el-checkbox>
         </div>
@@ -36,15 +36,15 @@
           </div>
 
           <div class="item-spec">
-            <span class="spec-fa spec-l">{{item.publishType}}-{{Number(item.publishType)+2}}天发货</span>
+            <span class="spec-fa spec-l">{{item.goodsBrand}}</span>
             <span class="spec-fa spec-r">{{item.goodsStandard}}</span>
           </div>
           <div class="item-ps">
             <div class="item-price">{{item.mallPrice}}</div>
             <div class="item-num">
-              <button>-</button>
-              <input type="text" value="1" />
-              <button>+</button>
+              <button class="qtyleft">-</button>
+              <input type="text" :value="item.qty" />
+              <button class="qtyright">+</button>
             </div>
           </div>
         </div>
@@ -58,26 +58,46 @@
         <span class="allPrice">{{totalPrice}}</span>
         <span>合计：</span>
       </div>
-      <div class="totalbtn">去结算</div>
+      <div class="totalbtn" @click="qtyright">去结算</div>
     </div>
+    <!-- margin值 -->
+    <div class="mar_bom"></div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      num:1
+    };
+  },
   methods: {
+    // 跳转到上一个
     previous() {
       this.$router.go(-1);
       // console.log(this.previousRouter);
+    },
+    // 给最后一个商品添加类名
+    addclass() {
+      let index = this.$refs.itemlen.length - 1;
+      let odiv = this.$refs.itemlen[index];
+    },
+    // qty++
+    qtyright() {
+      console.log(this.$store.state);
+      
+      // console.log(this.$store.commit("changeQty"),{});
+      // return this.$store.getters.totalPrice;
     }
   },
   computed: {
     cartlist() {
       return this.$store.state.cartlist;
     },
-    totalPrice(){
-      return this.$store.getters.totalPrice
-    }
+    totalPrice() {
+      return this.$store.getters.totalPrice;
+    },
   },
   created() {
     console.log(this.$store);
@@ -141,6 +161,7 @@ export default {
 }
 .item-info {
   float: left;
+  min-width: 215px;
 }
 .item-title {
   overflow: hidden;
@@ -202,9 +223,10 @@ export default {
   height: 24px;
 }
 .item-remove {
-  float: left;
+  float: right;
   margin-left: 2px;
-  color: red;
+  color: #555;
+  font-size: 20px;
 }
 .total {
   width: 100%;
@@ -214,6 +236,9 @@ export default {
   position: fixed;
   bottom: 0;
   z-index: 100;
+}
+.total:before {
+  content: 1111111111;
 }
 .settlement {
   float: left;
@@ -234,14 +259,14 @@ export default {
   float: right;
   font-size: 14px;
 }
-.allPrice{
+.allPrice {
   color: red;
 }
 .allPrice:before {
   content: "￥";
   font-size: 12.8px;
 }
-.totalbtn{
+.totalbtn {
   float: left;
   height: 100%;
   background: red;
@@ -250,5 +275,8 @@ export default {
   text-align: center;
   line-height: 43px;
   font-size: 14px;
+}
+.mar_bom {
+  margin-bottom: 43px;
 }
 </style>
