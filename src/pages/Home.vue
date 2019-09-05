@@ -27,7 +27,7 @@ export default {
     return {
       active: "hot",
       topType: [
-        { title: "依谷热卖", ty_id: 1, path: "home/hot" },
+          { title: "依谷热卖", ty_id: 1, path: "home/hot" },
         { title: "新鲜水果", ty_id: 2, path: "home/fruit" },
         { title: "绿色菜篮", ty_id: 3, path: "home/green" },
         { title: "粮油调味", ty_id: 4, path: "home/oil" },
