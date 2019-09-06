@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <div  v-if="btnFlag" class="go-top el-icon-arrow-up" @click="backTop"></div>
+    <div v-if="btnFlag" class="go-top el-icon-arrow-up" @click="backTop"></div>
     <!-- TopNav -->
     <header class="user-head">
       <div class="user-head-l">
@@ -40,10 +40,7 @@
           <div class="goods-name ellipsis">{{item.goodsName}}</div>
           <div class="price-cart">
             <i class="goods-price">{{item.mallPrice}}</i>
-            <i
-              class="icon icon-add-cart el-icon-shopping-cart-1"
-              @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,item.qty)"
-            ></i>
+            <i class="icon icon-add-cart el-icon-shopping-cart-1" @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,item.qty)"></i>
           </div>
         </div>
       </div>
@@ -55,7 +52,7 @@
 export default {
   data() {
     return {
-      btnFlag:0,
+      btnFlag: 0,
       qty: 1,
       topNav: {
         icon: "el-icon-setting",
@@ -163,7 +160,7 @@ export default {
       })[0];
       if (hasItem) {
         this.$store.commit("changeQty", { id: id, qty: hasItem.qty + 1 });
-        console.log(hasItem.qty);
+        // console.log(hasItem.qty);
       } else {
         this.$store.commit("addItem", {
           goodsImg,
@@ -423,16 +420,16 @@ i {
 /* .icon-add-cart:before {
     content: "el-icon-shopping-cart-2";
 } */
-.go-top{
-color: rgb(173, 168, 168);
-font-size: 30px;
-z-index: 100;
-position: fixed;
-bottom: 60px;
-right: 10px;
-background: #fff;
-border: 1px solid rgb(173, 168, 168);
-border-radius: 50%;
-opacity:0.8;
+.go-top {
+  color: rgb(173, 168, 168);
+  font-size: 30px;
+  z-index: 100;
+  position: fixed;
+  bottom: 60px;
+  right: 10px;
+  background: #fff;
+  border: 1px solid rgb(173, 168, 168);
+  border-radius: 50%;
+  opacity: 0.8;
 }
 </style>

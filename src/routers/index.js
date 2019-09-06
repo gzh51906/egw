@@ -97,7 +97,9 @@ let router = new VueRouter({
         path: '/cart',
         component: Cart,
         // 路由原信息：给路由定义一些额外的配置参数利用这个参数来确认这个路由需要什么样的权限
-        meta:{requiresAuth:true}
+        meta: {
+            requiresAuth: true
+        }
     }, {
         name: "reg",
         path: "/reg",
@@ -113,7 +115,10 @@ let router = new VueRouter({
     }, {
         name: 'goods',
         path: '/goods',
-        component: Goods
+        component: Goods,
+        /* meta: {
+            keepAlive: true // 需要被缓存
+        } */
     }, {
         // 默认跳转到首页
         path: "/",
@@ -123,11 +128,11 @@ let router = new VueRouter({
         }
     }]
 })
-router.beforeEach(function(to,from,next){
-    console.log('beforeEachaaaa',to,from);
-    if(to.meta.requiresAuth){
-        
+/* router.beforeEach(function (to, from, next) {
+    // console.log('beforeEachaaaa',to,from);
+    if (to.meta.requiresAuth) {
+
     }
     next();
-})
+}) */
 export default router;

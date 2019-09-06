@@ -19,9 +19,9 @@
     </header>
     <div class="cartlist clearfix">
       <div ref="itemlen" class="cartitem clearfix" v-for="(item,index) in cartlist" :key="item.id">
-        <div   class="item-check clearfix">
+        <div class="item-check clearfix">
 
-          <el-checkbox name="type" ></el-checkbox>
+          <el-checkbox name="type"></el-checkbox>
 
         </div>
         <div class="item-img">
@@ -56,7 +56,7 @@
       <div class="settlement" @click.stop="allele">
         <el-checkbox label="全选" name="type"></el-checkbox>
       </div>
-      <div class="checkAll" >
+      <div class="checkAll">
         <span class="allPrice">{{totalPrice}}</span>
         <span>合计：</span>
       </div>
@@ -83,7 +83,7 @@ export default {
     // 全选
     allele(e) {
       let checkted = e.target.checked;
-      for(var i = 0; i<this.$refs.itemlen.length; i++){
+      for (var i = 0; i < this.$refs.itemlen.length; i++) {
         console.log(this.$refs.itemlen[i].children[0]);
       }
     },
@@ -102,8 +102,8 @@ export default {
       self.qty++;
     },
     // 删除
-    removeitem(index){
-      this.$store.commit('removeItem',index)
+    removeitem(index) {
+      this.$store.commit("removeItem", index);
     }
   },
   computed: {

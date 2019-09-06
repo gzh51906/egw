@@ -2,7 +2,7 @@
   <div class="content">
     <img :src="bg" class="bg">
     <ul class="goods">
-      <li class="list" v-for="item in goods" :key="item.id">
+      <li class="list" v-for="item in goods" :key="item.id" @click="goto(item.bigImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,item.slogan,1)">
         <img :src="item.bigImg" class="picture">
         <p class="title">{{item.goodsName}}</p>
         <p class="slogan">{{item.slogan}}</p>
@@ -13,7 +13,7 @@
         </div>
         <div class="price">
           <span class="pri">￥{{item.mallPrice}}</span>
-          <i class="cart"></i>
+          <i class="el-icon-shopping-cart-1 cart" @click.stop="addcart(item.bigImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,1)"></i>
         </div>
       </li>
     </ul>
@@ -27,8 +27,66 @@ export default {
       goods: []
     };
   },
+  methods: {
+    goto(
+      bigImg,
+      goodsName,
+      mallPrice,
+      goodsStandard,
+      id,
+      goodsBrand,
+      slogan,
+      qty
+    ) {
+      this.$router.push({
+        name: "goods",
+        params: {
+          bigImg,
+          goodsName,
+          mallPrice,
+          goodsStandard,
+          id,
+          goodsBrand,
+          slogan,
+          qty
+        }
+      });
+      this.$store.commit("addlist", {
+        bigImg,
+        goodsName,
+        mallPrice,
+        goodsStandard,
+        id,
+        goodsBrand,
+        slogan,
+        qty
+      });
+    },
+    addcart(bigImg, goodsName, mallPrice, goodsStandard, id, goodsBrand) {
+      let { cartlist } = this.$store.state;
+      var hasItem = cartlist.filter(function(item) {
+        // 得到一个空数组或者数组
+        return item.id == id;
+      })[0];
+      if (hasItem) {
+        this.$store.commit("changeQty", { id: id, qty: hasItem.qty + 1 });
+        // console.log(hasItem.qty);
+      } else {
+        this.$store.commit("addItem", {
+          goodsImg: bigImg,
+          goodsName,
+          mallPrice,
+          goodsStandard,
+          id,
+          goodsBrand,
+          qty: 1
+        });
+      }
+    }
+  },
   props: ["msg"],
   async created() {
+    this.$store.commit("clearlist");
     let { data: { data } } = await this.$axios.get(
       "http://52.78.186.217:8888/home/goodsbgt",
       {
@@ -127,6 +185,10 @@ export default {
           background: #f00;
           border-radius: 50%;
           margin-right: 8px;
+          font-size: 14px;
+          line-height: 24px;
+          color: #fff;
+          text-align: center;
         }
       }
     }
