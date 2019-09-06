@@ -20,5 +20,6 @@ new Vue({
   // homerouter,
   router,
   store,
+
   render: h => h(App),
 }).$mount('#app')

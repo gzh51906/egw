@@ -4,6 +4,7 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+
 let store = new Vuex.Store({
     // state 类似组件中的data
     state: {
@@ -18,9 +19,8 @@ let store = new Vuex.Store({
             //     qty:1,
             // }
         ],
-        user:[
-
-        ]
+        user: [],
+        itemlist: []
     },
     // 更新state
     getters: {
@@ -36,26 +36,38 @@ let store = new Vuex.Store({
             state.cartlist.push(item)
         },
         // 添加用户名信息
-        adduser(state,item){
+        adduser(state, item) {
             state.user = [];
             state.user.push(item)
         },
+
+
+        addlist(state, item) {
+            state.itemlist.push(item)
+        },
+        clearlist(state) {
+            state.itemlist = []
+        },
+
+
         // 删除
-        removeItem(state,index){
+        removeItem(state, index) {
             // state.cartlist = state.cartlist.filter(item=>{item.id != id});
-            state.cartlist.splice(index,1)
+            state.cartlist.splice(index, 1)
         },
         // 改变数量
-        changeQty(state,  {qty, id }) {
+        changeQty(state, {
+            qty,
+            id
+        }) {
             state.cartlist = state.cartlist.map(item => {
                 if (item.id === id) {
-                    item.qty= qty;
+                    item.qty = qty;
                 }
                 return item;
             })
         }
-        
+
     }
 });
-
-export default store
+export default store;
