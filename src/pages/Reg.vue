@@ -129,12 +129,7 @@ export default {
             {
               username: this.ruleForm.username,
               password: this.ruleForm.pass
-<<<<<<< HEAD
             });
-=======
-            }
-          );
->>>>>>> cxd
           this.$router.push("/login");
         } else {
           // console.log("error submit!!");

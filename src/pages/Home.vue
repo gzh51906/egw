@@ -30,18 +30,6 @@ export default {
     return {
       active: "hot",
       topType: [
-<<<<<<< HEAD
-          { title: "依谷热卖", ty_id: 1, path: "home/hot" },
-        { title: "新鲜水果", ty_id: 2, path: "home/fruit" },
-        { title: "绿色菜篮", ty_id: 3, path: "home/green" },
-        { title: "粮油调味", ty_id: 4, path: "home/oil" },
-        { title: "干活特产", ty_id: 5, path: "home/ganhuo" },
-        { title: "零食饮料", ty_id: 6, path: "home/snacks" },
-        { title: "美酒茗茶", ty_id: 7, path: "home/mincha" },
-        { title: "礼品礼券", ty_id: 8, path: "home/cardli" },
-        { title: "家具厨卫", ty_id: 9, path: "home/chuwei" },
-        { title: "创意家电", ty_id: 10, path: "home/jiadian" }
-=======
         { title: "依谷热卖", ty_id: 1, path: "/home/hot" },
         { title: "新鲜水果", ty_id: 2, path: "/home/fruit" },
         { title: "绿色菜篮", ty_id: 3, path: "/home/green" },
@@ -52,7 +40,6 @@ export default {
         { title: "礼品礼券", ty_id: 8, path: "/home/cardli" },
         { title: "家具厨卫", ty_id: 9, path: "/home/chuwei" },
         { title: "创意家电", ty_id: 10, path: "/home/jiadian" }
->>>>>>> 41df46400a20a2248ae6fb4bbfb7024dcaa6f473
       ]
     };
   },

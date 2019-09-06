@@ -1,4 +1,4 @@
-import Home from '../pages/Home.vue';
+import Home from '../pages/Home.vue'
 import Classify from '../pages/Classify.vue'
 import Card from '../pages/Card.vue'
 import Cart from '../pages/Cart.vue'
@@ -17,6 +17,16 @@ import Mincha from "../Home/Mincha.vue"
 import Cardli from "../Home/Cardli.vue"
 import Chuwei from "../Home/Chuwei.vue"
 import Jiadian from "../Home/Jiadian.vue"
+
+import All from "../classify/all.vue"
+import Apple from "../classify/apple.vue"
+import Kiwi from "../classify/kiwi.vue"
+import Gift from "../classify/gift.vue"
+import Grape from "../classify/grape.vue"
+import Hotfruit from "../classify/hotfruit.vue"
+import Olther from "../classify/olther.vue"
+import Orange from "../classify/orange.vue"
+import Peach from "../classify/peach.vue"
 
 // 引入Router
 import VueRouter from "vue-router"
@@ -86,7 +96,50 @@ let router = new VueRouter({
     }, {
         name: 'classify',
         path: '/classify',
-        component: Classify
+        component: Classify,
+        children: [{
+            name: "all",
+            path: "all",
+            component: All
+        },{
+            // 当浏览器路径为/的时候,重定向"/all"
+            path:"/",
+            redirect:"all"
+        }
+        ,{
+            name:"kiwi",
+            path:"kiwi",
+            component:Kiwi
+        },{
+            name:"apple",
+            path:"apple",
+            component:Apple
+        },{
+            name:"grape",
+            path:"grape",
+            component:Grape
+        },{
+            name:"orange",
+            path:"orange",
+            component:Orange
+        },{
+            name:"peach",
+            path:"peach",
+            component:Peach
+        },{
+            name:"hotfruit",
+            path:"hotfruit",
+            component:Hotfruit
+        },{
+            name:"olther",
+            path:"olther",
+            component:Olther
+        },{
+            name:"gift",
+            path:"gift",
+            component:Gift
+        }
+    ]
     }, {
         name: 'card',
         path: '/card',
@@ -96,7 +149,9 @@ let router = new VueRouter({
         path: '/cart',
         component: Cart,
         // 路由原信息：给路由定义一些额外的配置参数利用这个参数来确认这个路由需要什么样的权限
-        meta:{requiresAuth:true}
+        meta: {
+            requiresAuth: true
+        }
     }, {
         name: "reg",
         path: "/reg",
@@ -118,10 +173,10 @@ let router = new VueRouter({
         }
     }]
 })
-router.beforeEach(function(to,from,next){
-    console.log('beforeEachaaaa',to,from);
-    if(to.meta.requiresAuth){
-        
+router.beforeEach(function (to, from, next) {
+    console.log('beforeEachaaaa', to, from);
+    if (to.meta.requiresAuth) {
+
     }
     next();
 })
