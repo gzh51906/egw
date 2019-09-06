@@ -88,11 +88,18 @@ export default {
         }
       );
       if (data.code === 1) {
-        // let targetUrl = this.$route.query.targetUrl || '/mine'
-        this.$router.push("reg");
+        // 如果登录成功
+        let user = this.ruleFrom.username
+      // 将用户名保存在vuex
+        this.$store.commit("adduser", {user})
+        console.log(this.$store);
+        
+        // 如果targetUrl有就跳到this.$route.query.targetUrl如果没有的话就跳到/user
+        let targetUrl = this.$route.query.targetUrl || '/user'
+        this.$router.push(targetUrl);
 
         // 保存token到本地
-        // this.$store.commit('login',data.data.authorization)
+        localStorage.setItem('Authorization',data.data.authorization);
       } else {
         console.log(this.ruleFrom.username, this.ruleFrom.userPassword);
         alert("用户名或密码错误");

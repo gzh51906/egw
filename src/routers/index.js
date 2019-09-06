@@ -22,6 +22,7 @@ import Jiadian from "../Home/Jiadian.vue"
 import VueRouter from "vue-router"
 
 import Vue from "vue"
+import { TabPane } from 'element-ui';
 
 // 安装使用路由
 Vue.use(VueRouter);
@@ -96,6 +97,7 @@ let router = new VueRouter({
         path: '/cart',
         component: Cart,
         // 路由原信息：给路由定义一些额外的配置参数利用这个参数来确认这个路由需要什么样的权限
+        // requiresAuth:true  true为需要登录权限才能访问
         meta:{requiresAuth:true}
     }, {
         name: "reg",
@@ -118,11 +120,23 @@ let router = new VueRouter({
         }
     }]
 })
+// 路由拦截，需要路由跳转之前拦截
 router.beforeEach(function(to,from,next){
     console.log('beforeEachaaaa',to,from);
+    // 如果需要登录权限
     if(to.meta.requiresAuth){
-        
-    }
+        let authorization = localStorage.getItem('Authorization');
+        // 如果有说明已登录  没有就跳到登录界面
+        if(authorization){
+            next()
+        }else{
+            next({
+                path:'/login',
+                query:{targetUrl:to.fullPath}
+            })
+        }
+    }else{
     next();
+}
 })
 export default router;

@@ -17,6 +17,9 @@ let store = new Vuex.Store({
             //     mallPrice: 199,
             //     qty:1,
             // }
+        ],
+        user:[
+
         ]
     },
     // 更新state
@@ -28,8 +31,14 @@ let store = new Vuex.Store({
         }
     },
     mutations: {
+        // 添加购物车
         addItem(state, item) {
             state.cartlist.push(item)
+        },
+        // 添加用户名信息
+        adduser(state,item){
+            state.user = [];
+            state.user.push(item)
         },
         // 删除
         removeItem(state,index){

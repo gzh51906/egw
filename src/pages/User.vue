@@ -21,7 +21,7 @@
         <img :src="topNav.srcUrl" alt />
         <div class="user-t" @click="goto('login')">
           <div class="user-t-top">下午好</div>
-          <div class="user-t-botm">点击登录/注册用户</div>
+          <div class="user-t-botm">{{logReg}}</div>
         </div>
       </div>
     </div>
@@ -55,6 +55,7 @@
 export default {
   data() {
     return {
+      logReg:'点击登录/注册用户',
       btnFlag:0,
       qty: 1,
       topNav: {
@@ -216,6 +217,13 @@ export default {
         this.dataitem.push(self);
       });
     });
+    // 如果user有信息 那么就把它绑定上去
+    if(this.$store.state.user.length != 0){
+      this.logReg = this.$store.state.user[0].user;
+      this.topNav.srcUrl = require('../assets/panhu.png');
+    }else{
+
+    }
   },
   mounted() {
     window.addEventListener("scroll", this.scrollToTop);
