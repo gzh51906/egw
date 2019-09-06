@@ -221,8 +221,6 @@ export default {
     if(this.$store.state.user.length != 0){
       this.logReg = this.$store.state.user[0].user;
       this.topNav.srcUrl = require('../assets/panhu.png');
-    }else{
-
     }
   },
   mounted() {
@@ -442,5 +440,9 @@ background: #fff;
 border: 1px solid rgb(173, 168, 168);
 border-radius: 50%;
 opacity:0.8;
+}
+.user-t-botm{
+  font-size: 14px;
+  color:yellowgreen;
 }
 </style>

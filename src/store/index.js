@@ -18,9 +18,7 @@ let store = new Vuex.Store({
             //     qty:1,
             // }
         ],
-        user:[
-
-        ]
+        user:[]
     },
     // 更新state
     getters: {
@@ -47,6 +45,7 @@ let store = new Vuex.Store({
         },
         // 改变数量
         changeQty(state,  {qty, id }) {
+            // 遍历cartlist 如果里面有商品id和我要添加的商品的这个id一样
             state.cartlist = state.cartlist.map(item => {
                 if (item.id === id) {
                     item.qty= qty;

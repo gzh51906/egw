@@ -10,19 +10,12 @@
       <div class="nav-r">
         <i class="el-icon-more"></i>
       </div>
-      <!-- <div class="menu van-popup2" v-show="check">
-        <div v-for="item in menulist" :key="item.name">
-          <i :class="item.icon"></i>
-          {{item.name}}
-        </div>
-      </div>-->
     </header>
     <div class="cartlist clearfix">
       <div ref="itemlen" class="cartitem clearfix" v-for="(item,index) in cartlist" :key="item.id">
-        <div   class="item-check clearfix">
-
-          <el-checkbox name="type" ></el-checkbox>
-
+        <div class="item-check clearfix" >
+          <!-- 复选框 -->
+          <input name="type" @click="eckfa" ref="itemcheck" type="checkbox" :checked="chec == true" />
         </div>
         <div class="item-img">
           <img :src="item.goodsImg" alt />
@@ -53,11 +46,12 @@
       </div>
     </div>
     <div class="total">
-      <div class="settlement" @click.stop="allele">
-        <el-checkbox label="全选" name="type"></el-checkbox>
+      <div class="settlement">
+        <input type="checkbox" id="male" @click="alleck" />
+        <label for="male" class="alltext">全选</label>
       </div>
-      <div class="checkAll" >
-        <span class="allPrice">{{totalPrice}}</span>
+      <div class="checkAll">
+        <span class="allPrice">{{totalPrice.toFixed(2)}}</span>
         <span>合计：</span>
       </div>
       <div class="totalbtn">去结算</div>
@@ -71,21 +65,15 @@
 export default {
   data() {
     return {
-      num: 1
+      num: 1,
+      chec: false,
+      flag:true
     };
   },
   methods: {
     // 跳转到上一个
     previous() {
       this.$router.go(-1);
-      // console.log(this.previousRouter);
-    },
-    // 全选
-    allele(e) {
-      let checkted = e.target.checked;
-      for(var i = 0; i<this.$refs.itemlen.length; i++){
-        console.log(this.$refs.itemlen[i].children[0]);
-      }
     },
     // 数量--
     qtyleft(index) {
@@ -102,8 +90,18 @@ export default {
       self.qty++;
     },
     // 删除
-    removeitem(index){
-      this.$store.commit('removeItem',index)
+    removeitem(index) {
+      this.$store.commit("removeItem", index);
+    },
+    alleck() {
+      this.chec = !this.chec;
+    },
+    eckfa() {
+      // 每次点击把数据布尔值修改 然后传入到vuex中
+      // vuex筛选布尔值为true的商品
+      // 将价格乘以数量然后返回
+      console.log(1);
+      this.chec = false;
     }
   },
   computed: {
@@ -121,6 +119,19 @@ export default {
 </script>
 
 <style>
+body {
+  min-height: 667px;
+  width: 100%;
+  background: #f0f2f5;
+}
+#male {
+  margin-top: 15px;
+  float: left;
+}
+.alltext {
+  margin-top: 15px;
+  margin-left: 10px;
+}
 .clearfix:after {
   content: " ";
   display: block;
@@ -138,6 +149,8 @@ export default {
 }
 
 .cartitem {
+  background: #fff;
+  margin-bottom: 1px;
   padding: 5px 5px 5px 0;
   width: 100%;
   height: 100%;
@@ -182,6 +195,7 @@ export default {
   /* margin-left: 15px; */
   /* font-size: 14px; */
   max-width: 204px;
+  min-width: 204px;
   height: 36px;
   float: left;
 }
@@ -280,7 +294,7 @@ export default {
   font-size: 12.8px;
 }
 .totalbtn {
-  float: left;
+  float: right;
   height: 100%;
   background: red;
   color: #fff;

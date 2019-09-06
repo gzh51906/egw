@@ -92,7 +92,7 @@ export default {
         let user = this.ruleFrom.username
       // 将用户名保存在vuex
         this.$store.commit("adduser", {user})
-        console.log(this.$store);
+        // console.log(this.$store);
         
         // 如果targetUrl有就跳到this.$route.query.targetUrl如果没有的话就跳到/user
         let targetUrl = this.$route.query.targetUrl || '/user'
@@ -101,7 +101,7 @@ export default {
         // 保存token到本地
         localStorage.setItem('Authorization',data.data.authorization);
       } else {
-        console.log(this.ruleFrom.username, this.ruleFrom.userPassword);
+        // console.log(this.ruleFrom.username, this.ruleFrom.userPassword);
         alert("用户名或密码错误");
       }
     }
