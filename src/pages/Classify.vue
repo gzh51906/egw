@@ -3,96 +3,82 @@
     <div class="classify">
       <el-container>
         <!-- 头部搜索 -->
-        <el-header>
-          <el-button type="text" disabled @click="goback">
-                <i class="el-icon-arrow-left"></i>
+        <el-header style="height: 45px;">
+          <el-button type="text" disabled>
+            <div class="gotoback" @click="previous">
+              <i class="el-icon-arrow-left"></i>
+            </div>
             </el-button>
-            <el-input v-model="input" placeholder="大闸蟹" prefix-icon="el-icon-search"></el-input>
+            <el-input placeholder="大闸蟹" prefix-icon="el-icon-search"></el-input>
             <el-button type="text" disabled>
                 <i class="el-icon-more three_dian" size="medium" color="#444"></i>
             </el-button>
         </el-header>
-        <!-- 第二栏导航 -->
-         <el-menu :default-active="active" class="el-menu-demo" router mode="horizontal">
-              <el-menu-item :index="item.path" v-for="item in topType" :key="item.ty_id">
-                  <p class="type">{{item.title}}</p>
+        
+        
+      </el-container>
+      <!-- 第二栏导航 -->
+         <el-menu
+           class="el-menu-demo" 
+           :default-active="active" 
+           router 
+           mode="horizontal"
+           @select="changeActive"
+          >
+              <el-menu-item :index="item.path" v-for="item in topype" :key="item.ty_id">
+                <!-- <router-link :to="item.path" :active-class="active"> -->
+                  <p class="type">
+                    {{item.name}}
+                  </p>
+                <!-- </router-link> -->
               </el-menu-item>
           </el-menu>
-        <el-container>
-          <!-- 侧边栏 -->
-          <el-aside width="105px">
-            <el-card class="box-card">
-              <div :index='item.path' v-for="item in topType" :key="item.ty_id" class="text item">
-              {{item.tittle }}
-          </div>
-        </el-card>
-          </el-aside>
-          <el-main>
-            <div class="itmlist">
-              <div class="fl">
-              <img src="../assets/logo.png" alt="">
-              </div>
-              <div class="fr">
-                <div class="nam">台湾...</div>
-                <div class="intro">来自...</div>
-                <div class="supro">
-                  <span class="one">自营</span>
-                  <span class="two">次日达</span>
-                  <span class="three">仓库</span>
-                </div>
-                <div class="pic">￥58.8</div>
-                <div class="cart">
-                  <i class="el-icon-goods"></i>
-                </div>
-              </div>
-            </div>
-            
-          </el-main>
+          <el-container>
+         <router-view></router-view>
         </el-container>
-      </el-container>
-        
-        
-
     </div>
 </template>
 
 <script>
-import router from "vue-router";
+import Vue from "vue";
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
+
+//点击重复不会报错
+// const originalPush = Router.prototype.push;
+// Router.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch(err => err);
+// };
+
 export default {
   data() {
     return {
       active: "all",
-      topType: [
-        { title: "全部", ty_id: 1, path: "../classify/all" },
-        { title: "奇异果/车厘子", ty_id: 2, path: "../classify/kiwi" },
-        { title: "苹果/梨子/瓜类", ty_id: 3, path: "../classify/apple" },
-        { title: "提子/葡萄/莓类", ty_id: 4, path: "../classify/grape" },
-        { title: "橙桔柑柚", ty_id: 5, path: "../classify/orange" },
-        { title: "桃李杏枣", ty_id: 6, path: "../classify/peach" },
-        { title: "热带水果", ty_id: 7, path: "../classify/hotfruit" },
-        { title: "其他水果", ty_id: 8, path: "../classify/olther" },
-        { title: "水果礼盒", ty_id: 9, path: "../classify/gift" }
+      topype: [
+        { name: "全部", ty_id: 1, path: "/classify/all" },
+        { name: "奇异果/车厘子", ty_id: 2, path: "/classify/kiwi" },
+        { name: "苹果/梨子/瓜类", ty_id: 3, path: "/classify/apple" },
+        { name: "提子/葡萄/莓类", ty_id: 4, path: "/classify/grape" },
+        { name: "橙桔柑柚", ty_id: 5, path: "/classify/orange" },
+        { name: "桃李杏枣", ty_id: 6, path: "/classify/peach" },
+        { name: "热带水果", ty_id: 7, path: "/classify/hotfruit" },
+        { name: "其他水果", ty_id: 8, path: "/classify/olther" },
+        { name: "水果礼盒", ty_id: 9, path: "/classify/gift" }
       ]
     };
   },
   methods: {
-    goback() {
-      this.$router.go(-1);
-    },
-    changeActive(index) {
+    changeActive(index, path) {
+      console.log(index, path);
       this.active = index;
     },
-    goto() {
-      this.$router.push({ path: "../classify/all" });
+    previous() {
+      //跳转上一页
+      this.$router.go(-1);
     }
   },
-  components: {
-    router
-  },
-  async created() {
-    let ilist = await this.$axios("http://52.78.186.217:8888/group/list");
-    this.ilist = ilist.list[0].sort;
-    console.log(list.list[0].sort);
+  created() {
+    this.active = this.$route.path;
   }
 };
 </script>
@@ -140,22 +126,26 @@ export default {
   margin-left: 0.066667rem;
 }
 
+.el-menu-item.is-active {
+  border: none;
+}
+
 .three_dian {
   width: 0.266667rem;
   margin-right: 8px;
   margin-top: 5px;
-  color: #666666;
+  color: #000;
 }
 .el-menu-demo {
   width: 100%;
-  height: 0.666667rem;
+  height: 0.75rem;
   display: flex;
   overflow: auto;
   box-sizing: border-box;
 }
 .type {
   line-height: 0.666667rem;
-  color: #7c7c7c;
+  color: #000;
   font-size: 0.266667rem;
 }
 .is-active .type {
@@ -163,92 +153,11 @@ export default {
 }
 
 .el-menu-item {
-  height: 0.333333rem;
-  line-height: 0.32rem;
+  height: 100%;
+  line-height: 0.75rem;
 }
 
-.el-main{
-  padding: 0;
-}
-
-.itmlist{
-  width: 100%;
-  height: 114px;
-  border-bottom: .013333rem solid #f6f6f6;
-}
-
-.fl{
-  float: left;
-}
-
-.fl img{
-  width: 2.4rem;
-  height: 2.4rem;
-  margin: .2rem;
-}
-
-.fr{
-  float: left;
-  margin-left: .4rem;
-}
-
-.nam{
-  margin-top: .2rem;
-  font-size: .4rem;
-  color: #000;
-}
-.intro{
-  font-size: .266667rem;
-  color: #939393;
-}
-
-.supro{
-  margin-top: .2rem;
-}
-
-.one{
+.active {
   color: #f44;
-  font-size: .266667rem;
-  margin-right: .2rem;
-}
-
-.two{
-  display: inline-block;
-  font-size: .266667rem;
-  line-height: .333333rem;
-  color: #fff;
-  background: #f44;
-  border-radius: .133333rem;
-  margin-right: .2rem;
-}
-
-.three{
-  font-size: .266667rem;
-  color: #af52ef;
-}
-
-.pic{
-  float: left;
-  font-size: .466667rem;
-  color: #f44;
-  padding-top: .2rem;
-}
-
-.cart{
-  width: .666667rem;
-  height: .666667rem;
-  float: right;
-  margin-top: .2rem;
-  background: #f44;
-  margin-left: 1.733333rem;
-  border-radius: 50% 50%;
-  text-align: center;
-}
-
-.cart i{
-  line-height: .666667rem;
-  font-size: .4rem;
-  line-height: .666667rem;
-  color: #fff;
 }
 </style>
