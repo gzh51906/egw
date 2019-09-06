@@ -1,6 +1,15 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive">
+        <!-- 这里是会被缓存的视图组件 -->
+      </router-view>
+    </keep-alive>
+
+    <router-view v-if="!$route.meta.keepAlive">
+      <!-- 这里是不被缓存的视图组件 -->
+    </router-view>
+
     <footer class="footer">
       <el-menu :default-active="active" class="el-menu-demo" router mode="horizontal" @select="changeActive" active-text-color="#f00">
         <el-menu-item :index="item.path" v-for="item in menu" :key="item.name">

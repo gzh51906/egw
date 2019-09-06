@@ -51,6 +51,7 @@
         <label for="male" class="alltext">全选</label>
       </div>
       <div class="checkAll">
+        <!-- <span class="allPrice">{{Math.round(totalPrice)}}</span> -->
         <span class="allPrice">{{totalPrice.toFixed(2)}}</span>
         <span>合计：</span>
       </div>

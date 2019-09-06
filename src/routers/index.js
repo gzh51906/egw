@@ -23,7 +23,9 @@ import Jiadian from "../Home/Jiadian.vue"
 import VueRouter from "vue-router"
 
 import Vue from "vue"
-import { TabPane } from 'element-ui';
+import {
+    TabPane
+} from 'element-ui';
 
 // 安装使用路由
 Vue.use(VueRouter);
@@ -99,7 +101,9 @@ let router = new VueRouter({
         component: Cart,
         // 路由原信息：给路由定义一些额外的配置参数利用这个参数来确认这个路由需要什么样的权限
         // requiresAuth:true  true为需要登录权限才能访问
-        meta:{requiresAuth:true}
+        meta: {
+            requiresAuth: true
+        }
     }, {
         name: "reg",
         path: "/reg",
@@ -115,7 +119,10 @@ let router = new VueRouter({
     }, {
         name: 'goods',
         path: '/goods',
-        component: Goods
+        component: Goods,
+        /* meta: {
+            keepAlive: true // 需要被缓存
+        } */
     }, {
         // 默认跳转到首页
         path: "/",
@@ -126,22 +133,24 @@ let router = new VueRouter({
     }]
 })
 // 路由拦截，需要路由跳转之前拦截
-router.beforeEach(function(to,from,next){
-    console.log('beforeEachaaaa',to,from);
+router.beforeEach(function (to, from, next) {
+    console.log('beforeEachaaaa', to, from);
     // 如果需要登录权限
-    if(to.meta.requiresAuth){
+    if (to.meta.requiresAuth) {
         let authorization = localStorage.getItem('Authorization');
         // 如果有说明已登录  没有就跳到登录界面
-        if(authorization){
+        if (authorization) {
             next()
-        }else{
+        } else {
             next({
-                path:'/login',
-                query:{targetUrl:to.fullPath}
+                path: '/login',
+                query: {
+                    targetUrl: to.fullPath
+                }
             })
         }
-    }else{
-    next();
-}
+    } else {
+        next();
+    }
 })
 export default router;
