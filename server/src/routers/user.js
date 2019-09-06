@@ -12,7 +12,8 @@ const {
 
 /* 引入数据返回格式模板 */
 const {
-    formData
+    formData,
+    token
 } = require("../utils");
 
 /* 查询用户中心商品列表 */
@@ -88,9 +89,13 @@ Router.post("/login", async (req, res) => {
             password
         });
         data = data[0];
-
+        let authorization = token.create(username);
         if (data) {
-            res.send(formData({}));
+            res.send(formData({
+                data: {
+                    authorization
+                }
+            }));
         } else {
             res.send(formData({
                 code: 0

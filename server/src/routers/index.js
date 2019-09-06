@@ -9,6 +9,7 @@ const homeGoods = require("./goods");
 const home = require("./home");
 const user = require("./user");
 const group = require("./group");
+const card = require("./card");
 
 /* 利用中间件格式化请求 */
 Router.use(express.json(), express.urlencoded({
@@ -34,5 +35,6 @@ Router.use("/goods", homeGoods);
 Router.use("/home", home);
 Router.use("/user", user);
 Router.use("/group", group);
+Router.use("/card", card);
 
 module.exports = Router;
