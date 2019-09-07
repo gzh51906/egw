@@ -1,9 +1,24 @@
 <template>
     <div class="all">
+      <el-menu
+           class="el-menu-demo" 
+           :default-active="active" 
+           router 
+           mode="horizontal"
+           @select="changeActive"
+          >
+            <el-menu-item :index="item.path" v-for="item in topype" :key="item.ty_id">
+              <!-- <router-link :to="item.path" :active-class="active"> -->
+                <p class="type">
+                  {{item.name}}
+                </p>
+              <!-- </router-link> -->
+            </el-menu-item>
+          </el-menu>
         <!-- 侧边栏 -->
           <el-aside
             width="105px"
-            class="el-menu-demo"
+            class="el-menu-fl"
           >
             <div class="CGE"
               :default-active="active" 
@@ -18,6 +33,42 @@
           </el-aside>
           <!-- 右边栏 -->
           <el-main>
+            <div class="itmlist">
+              <div class="fl">
+              <img src="../assets/logo.png" alt="">
+              </div>
+              <div class="fr">
+                <div class="nam">台湾...</div>
+                <div class="intro">来自...</div>
+                <div class="supro">
+                  <span class="one">自营</span>
+                  <span class="two">次日达</span>
+                  <span class="three">仓库</span>
+                </div>
+                <div class="pic">￥58.8</div>
+                <div class="cart">
+                  <i class="el-icon-goods"></i>
+                </div>
+              </div>
+            </div> 
+            <div class="itmlist">
+              <div class="fl">
+              <img src="../assets/logo.png" alt="">
+              </div>
+              <div class="fr">
+                <div class="nam">台湾...</div>
+                <div class="intro">来自...</div>
+                <div class="supro">
+                  <span class="one">自营</span>
+                  <span class="two">次日达</span>
+                  <span class="three">仓库</span>
+                </div>
+                <div class="pic">￥58.8</div>
+                <div class="cart">
+                  <i class="el-icon-goods"></i>
+                </div>
+              </div>
+            </div> 
             <div class="itmlist">
               <div class="fl">
               <img src="../assets/logo.png" alt="">
@@ -123,6 +174,17 @@ export default {
   data() {
     return {
       active: "hot",
+      topype: [
+        { name: "全部", ty_id: 1, path: "/classify/all" },
+        { name: "奇异果/车厘子", ty_id: 2, path: "/classify/kiwi" },
+        { name: "苹果/梨子/瓜类", ty_id: 3, path: "/classify/apple" },
+        { name: "提子/葡萄/莓类", ty_id: 4, path: "/classify/grape" },
+        { name: "橙桔柑柚", ty_id: 5, path: "/classify/orange" },
+        { name: "桃李杏枣", ty_id: 6, path: "/classify/peach" },
+        { name: "热带水果", ty_id: 7, path: "/classify/hotfruit" },
+        { name: "其他水果", ty_id: 8, path: "/classify/olther" },
+        { name: "水果礼盒", ty_id: 9, path: "/classify/gift" }
+      ],
       topTpe: [
         { name: "依谷热卖", ty_id: 1, path: "/home/hot" },
         { name: "新鲜水果", ty_id: 2, path: "/home/fruit" },
@@ -146,9 +208,9 @@ export default {
   },
   created() {
     this.active = this.$route.path;
-    axios.get('http://52.78.186.217:8888/group/list').then(({data})=>{
+    axios.get("http://52.78.186.217:8888/group/list").then(({ data }) => {
       // console.log(data);
-    })
+    });
   }
 };
 </script>
@@ -157,6 +219,7 @@ export default {
   height: 100%;
   box-sizing: border-box;
   width: 100%;
+  overflow: auto;
 }
 
 .el-aside {
@@ -266,5 +329,25 @@ export default {
 
 .active {
   background: #fff;
+}
+
+.type {
+  line-height: 0.666667rem;
+  color: #000;
+  font-size: 0.266667rem;
+}
+
+.el-menu-item {
+  height: 100%;
+  line-height: 0.75rem;
+}
+
+.el-menu-demo {
+  width: 100%;
+  height: 0.75rem;
+  overflow: auto;
+  display: flex;
+  box-sizing: border-box;
+  margin-top: 38px;
 }
 </style>
