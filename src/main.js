@@ -15,7 +15,6 @@ Vue.prototype.$url = url;
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
-Vue.prototype.$megu = megu;
 
 new Vue({
   // homerouter,
