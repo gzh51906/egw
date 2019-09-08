@@ -52,12 +52,8 @@
 export default {
   data() {
     return {
-<<<<<<< HEAD
-      logReg:'点击登录/注册用户',
-      btnFlag:0,
-=======
+      logReg: "点击登录/注册用户",
       btnFlag: 0,
->>>>>>> cxd
       qty: 1,
       topNav: {
         icon: "el-icon-setting",
@@ -219,11 +215,10 @@ export default {
       });
     });
     // 如果user有信息 那么就把它绑定上去
-    if(this.$store.state.user.length != 0){
+    if (this.$store.state.user.length != 0) {
       this.logReg = this.$store.state.user[0].user;
-      this.topNav.srcUrl = require('../assets/panhu.png');
-    }else{
-
+      this.topNav.srcUrl = require("../assets/panhu.png");
+    } else {
     }
   },
   mounted() {
