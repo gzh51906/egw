@@ -215,7 +215,7 @@ export default {
       });
     });
     // 如果user有信息 那么就把它绑定上去
-    if(this.$store.state.user.length != 0){
+    if (this.$store.state.user.length != 0) {
       this.logReg = this.$store.state.user[0].user;
       this.topNav.srcUrl = require('../assets/panhu.png');
     }

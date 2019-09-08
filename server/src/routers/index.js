@@ -21,7 +21,8 @@ Router.use((req, res, next) => {
     /* 设置响应头 */
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With,token");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS,PATCH");
+    // res.header('Content-Type', 'application/x-www-form-urlencoded');
     if (req.method == "OPTIONS") {
         res.sendStatus(200);
         // 等效于：res.status(200).send();

@@ -83,3 +83,54 @@ exports.insert = async (colName, data) => {
     client.close();
     return result;
 }
+
+// 删
+exports.remove = async (colName, query = {}) => {
+    let {
+        db,
+        client
+    } = await connect();
+    // console.log(query._id)
+    if (query._id) {
+        query._id = ObjectId(query._id);
+    }
+    //  获取集合
+    let collection = db.collection(colName);
+
+    collection.deleteMany(query)
+
+    client.close();
+}
+
+// 改
+exports.update = async (colName, query = {
+    _id
+}, {
+    username,
+    password
+} = {}) => {
+    let {
+        db,
+        client
+    } = await connect();
+
+    if (query._id) {
+        query._id = ObjectId(query._id);
+    }
+    //  获取集合
+    let collection = db.collection(colName);
+
+    let data = {}
+    if (username) {
+        data.username = username
+    }
+    if (password) {
+        data.password = password
+    }
+
+    collection.update(query, {
+        $set: data
+    })
+
+    client.close();
+}
