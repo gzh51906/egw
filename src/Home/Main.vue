@@ -97,15 +97,12 @@ export default {
     );
     this.bg = data.bgImg2;
 
-    let type = await this.$axios.get(
-      "http://52.78.186.217:8888/home/goodstype",
-      {
-        params: {
-          id: this.msg.bgurl
-        }
+    let type = await this.$axios.get("http://localhost:8888/home/goodstypes", {
+      params: {
+        id: this.msg.goodid
       }
-    );
-    this.goods = type.data.data.list;
+    });
+    this.goods = type.data;
   }
 };
 </script>
