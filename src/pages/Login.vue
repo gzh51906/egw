@@ -21,7 +21,7 @@
       <input type="text" placeholder="请输入用户名/手机号/邮箱" v-model="ruleFrom.username" />
       <input type="text" placeholder="请输入6位以上的密码" v-model="ruleFrom.userPassword" />
       <div class="hint">请输入登录密码，长度大于等于6位</div>
-      <button class="van-button" @click="gotoReg">立即登录</button>
+      <button :class="butcla" @click="gotoReg" @keyup.enter="gotoReg">立即登录</button>
       <div class="log-reg">
         <div class="log-reg-left" @click="goto('reg')">手机快速注册</div>
         <div class="log-reg-right">忘记密码</div>
@@ -34,6 +34,7 @@
 export default {
   data() {
     return {
+      butcla:'van-button',
       ruleFrom: {
         username: "",
         userPassword: ""
@@ -80,6 +81,7 @@ export default {
     },
     // 检查账号密码是否正确
     async gotoReg() {
+
       let { data } = await this.$axios.post(
         "http://52.78.186.217:8888/user/login",
         {
@@ -219,6 +221,11 @@ body {
   line-height: 43.75px;
   font-size: 14px;
   color: #fff;
+
+}
+.yegren{
+  background:yellowgreen;
+  border: 1px solid yellowgreen;
 }
 .log-reg {
   margin-top: 40px;
