@@ -7,7 +7,9 @@ const Router = express.Router();
 /* 引入数据库查询方法 */
 const {
     find,
-    insert
+    insert,
+    remove,
+    update
 } = require("../mongo/mongodb");
 
 /* 引入数据返回格式模板 */
@@ -29,17 +31,36 @@ Router.get("/", async (req, res) => {
 
 /* 增加用户 */
 Router.post("/reg", async (req, res) => {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = fun(date.getMonth() + 1);
+    var day = fun(date.getDate());
+    var house = fun(date.getHours());
+    var minute = fun(date.getMinutes());
+    var second = fun(date.getSeconds());
+
+    function fun(i) {
+        //判断传入的参数是否为小于10
+        if (i < 10) {
+            //参数小于10，转换为字符串然后和0拼接
+            i = String(i);
+            i = 0 + i;
+            return i;
+        }
+        return i;
+    }
+    let time = `${year}-${month}-${day}  ${house}:${minute}:${second}`;
+
     let {
         username,
-        password,
-        phone
+        password
     } = req.body;
-    console.log(username, password, phone)
+    // console.log(username, password, phone)
     try {
         insert("user", {
+            time,
             username,
-            password,
-            phone
+            password
         });
         res.send(formData());
     } catch (err) {
@@ -105,6 +126,50 @@ Router.post("/login", async (req, res) => {
         res.send(formData({
             code: 0
         }));
+    }
+})
+
+// 删除用户
+Router.delete("/", (req, res) => {
+    let {
+        id
+    } = req.query;
+    // res.send(id);
+    try {
+        remove('user', {
+            _id: id
+        })
+        res.send(formData())
+    } catch (err) {
+        res.send(formData({
+            code: 0
+        }))
+    }
+})
+
+// 修改用户
+Router.patch("/", (req, res) => {
+
+    let {
+        id,
+        username,
+        password
+    } = req.body.params;
+    // res.send(id);
+    // console.log(id)
+    // console.log(req.body.params)
+    try {
+        update('user', {
+            _id: id
+        }, {
+            username,
+            password
+        })
+        res.send(formData())
+    } catch (err) {
+        res.send(formData({
+            code: 0
+        }))
     }
 })
 
