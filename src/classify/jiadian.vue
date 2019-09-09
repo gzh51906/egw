@@ -4,11 +4,11 @@
   </div>
 </template>
 <script>
-import cont from "./Main.vue";
+import cont from "./main.vue";
 export default {
   name: "app",
   data() {
-    return { cent: { bgurl: 103, goodid: 8 } };
+    return { cent: { goodid: 9 } };
   },
   components: {
     cont
