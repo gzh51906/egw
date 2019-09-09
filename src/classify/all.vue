@@ -1,171 +1,31 @@
 <template>
-    <div class="all">
-      <el-menu
-           class="el-menu-demo" 
-           :default-active="active" 
-           router 
-           mode="horizontal"
-           @select="changeActive"
-          >
-            <el-menu-item :index="item.path" v-for="item in topype" :key="item.ty_id">
-              <!-- <router-link :to="item.path" :active-class="active"> -->
-                <p class="type">
-                  {{item.name}}
-                </p>
-              <!-- </router-link> -->
-            </el-menu-item>
-          </el-menu>
-        <!-- 侧边栏 -->
-          <el-aside
-            width="105px"
-            class="el-menu-fl"
-          >
-            <div class="CGE"
-              :default-active="active" 
-              router 
-              mode="horizontal"
-              @select="changeActive"
-            >
-              <div :index='item.path' v-for="item in topTpe" :key="item.ty_id" class="text item">
-                {{item.name }}
-              </div>
-            </div>
-          </el-aside>
-          <!-- 右边栏 -->
-          <el-main>
-            <div class="itmlist">
-              <div class="fl">
-              <img src="../assets/logo.png" alt="">
-              </div>
-              <div class="fr">
-                <div class="nam">台湾...</div>
-                <div class="intro">来自...</div>
-                <div class="supro">
-                  <span class="one">自营</span>
-                  <span class="two">次日达</span>
-                  <span class="three">仓库</span>
-                </div>
-                <div class="pic">￥58.8</div>
-                <div class="cart">
-                  <i class="el-icon-goods"></i>
-                </div>
-              </div>
-            </div> 
-            <div class="itmlist">
-              <div class="fl">
-              <img src="../assets/logo.png" alt="">
-              </div>
-              <div class="fr">
-                <div class="nam">台湾...</div>
-                <div class="intro">来自...</div>
-                <div class="supro">
-                  <span class="one">自营</span>
-                  <span class="two">次日达</span>
-                  <span class="three">仓库</span>
-                </div>
-                <div class="pic">￥58.8</div>
-                <div class="cart">
-                  <i class="el-icon-goods"></i>
-                </div>
-              </div>
-            </div> 
-            <div class="itmlist">
-              <div class="fl">
-              <img src="../assets/logo.png" alt="">
-              </div>
-              <div class="fr">
-                <div class="nam">台湾...</div>
-                <div class="intro">来自...</div>
-                <div class="supro">
-                  <span class="one">自营</span>
-                  <span class="two">次日达</span>
-                  <span class="three">仓库</span>
-                </div>
-                <div class="pic">￥58.8</div>
-                <div class="cart">
-                  <i class="el-icon-goods"></i>
-                </div>
-              </div>
-            </div> 
-            <div class="itmlist">
-              <div class="fl">
-              <img src="../assets/logo.png" alt="">
-              </div>
-              <div class="fr">
-                <div class="nam">台湾...</div>
-                <div class="intro">来自...</div>
-                <div class="supro">
-                  <span class="one">自营</span>
-                  <span class="two">次日达</span>
-                  <span class="three">仓库</span>
-                </div>
-                <div class="pic">￥58.8</div>
-                <div class="cart">
-                  <i class="el-icon-goods"></i>
-                </div>
-              </div>
-            </div> 
-            <div class="itmlist">
-              <div class="fl">
-              <img src="../assets/logo.png" alt="">
-              </div>
-              <div class="fr">
-                <div class="nam">台湾...</div>
-                <div class="intro">来自...</div>
-                <div class="supro">
-                  <span class="one">自营</span>
-                  <span class="two">次日达</span>
-                  <span class="three">仓库</span>
-                </div>
-                <div class="pic">￥58.8</div>
-                <div class="cart">
-                  <i class="el-icon-goods"></i>
-                </div>
-              </div>
-            </div> 
-            <div class="itmlist">
-              <div class="fl">
-              <img src="../assets/logo.png" alt="">
-              </div>
-              <div class="fr">
-                <div class="nam">台湾...</div>
-                <div class="intro">来自...</div>
-                <div class="supro">
-                  <span class="one">自营</span>
-                  <span class="two">次日达</span>
-                  <span class="three">仓库</span>
-                </div>
-                <div class="pic">￥58.8</div>
-                <div class="cart">
-                  <i class="el-icon-goods"></i>
-                </div>
-              </div>
-            </div> 
-            <div class="itmlist">
-              <div class="fl">
-              <img src="../assets/logo.png" alt="">
-              </div>
-              <div class="fr">
-                <div class="nam">台湾...</div>
-                <div class="intro">来自...</div>
-                <div class="supro">
-                  <span class="one">自营</span>
-                  <span class="two">次日达</span>
-                  <span class="three">仓库</span>
-                </div>
-                <div class="pic">￥58.8</div>
-                <div class="cart">
-                  <i class="el-icon-goods"></i>
-                </div>
-              </div>
-            </div> 
-          </el-main>
-    </div>
-     
+  <div class="all">
+    <el-menu class="el-menu-demo" :default-active="active" router mode="horizontal">
+      <el-menu-item :index="item.path" v-for="item in topype" :key="item.ty_id">
+        <p class="type">
+          {{item.name}}
+        </p>
+      </el-menu-item>
+    </el-menu>
+    <!-- 侧边栏 -->
+    <el-tabs tab-position="left" style="width:100px">
+      <ul class="left">
+        <li v-for="(item,index) in topTpe" :key="item.ty_id" class="title">
+          <p class="td" @click="goto(index,item.path)">{{item.name}}</p>
+        </li>
+      </ul>
+
+    </el-tabs>
+    <!-- 右边栏 -->
+    <el-main>
+      <router-view></router-view>
+    </el-main>
+  </div>
+
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import Vue from "vue";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
@@ -173,7 +33,7 @@ Vue.use(VueRouter);
 export default {
   data() {
     return {
-      active: "hot",
+      active: "fruit",
       topype: [
         { name: "全部", ty_id: 1, path: "/classify/all" },
         { name: "奇异果/车厘子", ty_id: 2, path: "/classify/kiwi" },
@@ -186,32 +46,43 @@ export default {
         { name: "水果礼盒", ty_id: 9, path: "/classify/gift" }
       ],
       topTpe: [
-        { name: "依谷热卖", ty_id: 1, path: "/home/hot" },
-        { name: "新鲜水果", ty_id: 2, path: "/home/fruit" },
-        { name: "绿色菜篮", ty_id: 3, path: "/home/green" },
-        { name: "粮油调味", ty_id: 4, path: "/home/oil" },
-        { name: "干活特产", ty_id: 5, path: "/home/ganhuo" },
-        { name: "零食饮料", ty_id: 6, path: "/home/snacks" },
-        { name: "美酒茗茶", ty_id: 7, path: "/home/mincha" },
-        { name: "礼品礼券", ty_id: 8, path: "/home/cardli" },
-        { name: "家具厨卫", ty_id: 9, path: "/home/chuwei" },
-        { name: "创意家电", ty_id: 10, path: "/home/jiadian" }
+        { name: "新鲜水果", ty_id: 2, path: "/classify/all/fruit" },
+        { name: "绿色菜篮", ty_id: 3, path: "/classify/all/green" },
+        { name: "粮油调味", ty_id: 4, path: "/classify/all/oil" },
+        { name: "干活特产", ty_id: 5, path: "/classify/all/ganhuo" },
+        { name: "零食饮料", ty_id: 6, path: "/classify/all/snacks" },
+        { name: "美酒茗茶", ty_id: 7, path: "/classify/all/mincha" },
+        { name: "礼品礼券", ty_id: 8, path: "/classify/all/cardli" },
+        { name: "家具厨卫", ty_id: 9, path: "/classify/all/chuwei" },
+        { name: "创意家电", ty_id: 10, path: "/classify/all/jiadian" }
       ]
     };
   },
   methods: {
-    changeActive(index, path) {
-      console.log(index, path);
+    changeActive(index) {
       this.active = index;
-      console.log(222);
+    },
+    goto(index, path) {
+      // console.log(index);
+      this.$router.push(path);
     }
   },
   created() {
     this.active = this.$route.path;
-    axios.get("http://52.78.186.217:8888/group/list").then(({ data }) => {
-      // console.log(data);
-    });
   }
+  // methods: {
+  //   changeActive(index, path) {
+  //     // console.log(index, path);
+  //     this.active = index;
+  //     // console.log(222);
+  //   }
+  // },
+  // created() {
+  //   this.active = this.$route.path;
+  //   axios.get("http://52.78.186.217:8888/group/list").then(({ data }) => {
+  //     // console.log(data);
+  //   });
+  // }
 };
 </script>
 <style scoped>
@@ -221,7 +92,9 @@ export default {
   width: 100%;
   overflow: auto;
 }
-
+.el-tabs {
+  float: left;
+}
 .el-aside {
   float: left;
 }
@@ -229,8 +102,13 @@ export default {
   padding: 0;
   margin-right: 0;
   overflow: auto;
+  width: 270.33px;
+  height: 600px;
 }
-
+.cent {
+  display: flex;
+  flex-direction: column;
+}
 .itmlist {
   width: 100%;
   height: 114px;
@@ -349,5 +227,17 @@ export default {
   display: flex;
   box-sizing: border-box;
   margin-top: 38px;
+}
+.left {
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid #aaa;
+}
+.left .title {
+  width: 100%;
+  height: 38px;
+  text-align: center;
+  color: #444;
+  line-height: 38px;
 }
 </style>

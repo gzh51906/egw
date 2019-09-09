@@ -1,20 +1,20 @@
 <template>
-<!-- 分类 -->
-    <div class="classify">
-        <header class="header">
-          <div class="gotoback" @click="previous">
-              <i class="el-icon-arrow-left"></i>
-          </div>
-          <div class="serch">
-            <el-button round icon="el-icon-search">大闸蟹</el-button>
-          </div>
-          <span class="el-icon-more three_dian" size="medium" color="#444"></span>
-        </header>
-      <!-- 第二栏导航 -->
-        <el-container>
-         <router-view></router-view>
-        </el-container>
-    </div>
+  <!-- 分类 -->
+  <div class="classify">
+    <header class="header">
+      <div class="gotoback" @click="previous">
+        <i class="el-icon-arrow-left"></i>
+      </div>
+      <div class="serch">
+        <el-button round icon="el-icon-search">大闸蟹</el-button>
+      </div>
+      <span class="el-icon-more three_dian" size="medium" color="#444"></span>
+    </header>
+    <!-- 第二栏导航 -->
+    <el-container>
+      <router-view></router-view>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     changeActive(index, path) {
-      console.log(index, path);
+      // console.log(index, path);
       this.active = index;
     },
     previous() {
@@ -97,7 +97,6 @@ export default {
   color: #999;
   float: left;
 }
-
 
 .three_dian {
   width: 0.266667rem;

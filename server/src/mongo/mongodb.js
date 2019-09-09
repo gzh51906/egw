@@ -107,7 +107,9 @@ exports.update = async (colName, query = {
     _id
 }, {
     username,
-    password
+    password,
+    goodsName,
+    mallPrice
 } = {}) => {
     let {
         db,
@@ -127,7 +129,12 @@ exports.update = async (colName, query = {
     if (password) {
         data.password = password
     }
-
+    if (goodsName) {
+        data.goodsName = goodsName
+    }
+    if (mallPrice) {
+        data.mallPrice = mallPrice
+    }
     collection.update(query, {
         $set: data
     })

@@ -20,6 +20,16 @@ import Chuwei from "../Home/Chuwei.vue"
 import Jiadian from "../Home/Jiadian.vue"
 
 import All from "../classify/all.vue"
+import s_fruit from "../classify/fruit.vue"
+import s_green from "../classify/green.vue"
+import s_oil from "../classify/oil.vue"
+import s_ganhuo from "../classify/ganhuo.vue"
+import s_snacks from "../classify/snacks.vue"
+import s_mincha from "../classify/mincha.vue"
+import s_cardli from "../classify/cardli.vue"
+import s_chuwei from "../classify/chuwei.vue"
+import s_jiadian from "../classify/jiadian.vue"
+
 import Apple from "../classify/apple.vue"
 import Kiwi from "../classify/kiwi.vue"
 import Gift from "../classify/gift.vue"
@@ -104,46 +114,49 @@ let router = new VueRouter({
         children: [{
             name: "all",
             path: "all",
-            component: All
-        },{
+            component: All,
+            children: [{
+                name: "fruit",
+                path: "fruit",
+                component: s_fruit
+            }, {
+                name: "green",
+                path: "green",
+                component: s_green
+            }, {
+                name: "oil",
+                path: "oil",
+                component: s_oil
+            }, {
+                name: "ganhuo",
+                path: "ganhuo",
+                component: s_ganhuo
+            }, {
+                name: "snacks",
+                path: "snacks",
+                component: s_snacks
+            }, {
+                name: "mincha",
+                path: "mincha",
+                component: s_mincha
+            }, {
+                name: "cardli",
+                path: "cardli",
+                component: s_cardli
+            }, {
+                name: "chuwei",
+                path: "chuwei",
+                component: s_chuwei
+            }, {
+                name: "jiadian",
+                path: "jiadian",
+                component: s_jiadian
+            }, ]
+        }, {
             // 当浏览器路径为/的时候,重定向"/all"
-            path:"/",
-            redirect:"all"
-        }
-        ,{
-            name:"kiwi",
-            path:"kiwi",
-            component:Kiwi
-        },{
-            name:"apple",
-            path:"apple",
-            component:Apple
-        },{
-            name:"grape",
-            path:"grape",
-            component:Grape
-        },{
-            name:"orange",
-            path:"orange",
-            component:Orange
-        },{
-            name:"peach",
-            path:"peach",
-            component:Peach
-        },{
-            name:"hotfruit",
-            path:"hotfruit",
-            component:Hotfruit
-        },{
-            name:"olther",
-            path:"olther",
-            component:Olther
-        },{
-            name:"gift",
-            path:"gift",
-            component:Gift
-        }
-    ]
+            path: "/",
+            redirect: "all/fruit"
+        }]
     }, {
         name: 'card',
         path: '/card',
@@ -186,7 +199,7 @@ let router = new VueRouter({
 })
 // 路由拦截，需要路由跳转之前拦截
 router.beforeEach(function (to, from, next) {
-    console.log('beforeEachaaaa', to, from);
+    // console.log('beforeEachaaaa', to, from);
     // 如果需要登录权限
     if (to.meta.requiresAuth) {
         let authorization = localStorage.getItem('Authorization');
