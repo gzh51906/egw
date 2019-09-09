@@ -40,7 +40,7 @@
           <div class="goods-name ellipsis">{{item.goodsName}}</div>
           <div class="price-cart">
             <i class="goods-price">{{item.mallPrice}}</i>
-            <i class="icon icon-add-cart el-icon-shopping-cart-1" @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,item.qty)"></i>
+            <i class="icon icon-add-cart el-icon-shopping-cart-1" @click="addcart(item.goodsImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,item.qty,item.che)"></i>
           </div>
         </div>
       </div>
@@ -149,7 +149,8 @@ export default {
       goodsStandard,
       id,
       goodsBrand,
-      qty
+      qty,
+      che
     ) {
       // 判断商品是否已经存在购物车
       // 存在改变数量
@@ -170,7 +171,8 @@ export default {
           goodsStandard,
           id,
           goodsBrand,
-          qty: 1
+          qty: 1,
+          che:false
         });
       }
     },

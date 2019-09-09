@@ -13,7 +13,7 @@
         </div>
         <div class="price">
           <span class="pri">￥{{item.mallPrice}}</span>
-          <i class="el-icon-shopping-cart-1 cart" @click.stop="addcart(item.bigImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,1)"></i>
+          <i class="el-icon-shopping-cart-1 cart" @click.stop="addcart(item.bigImg,item.goodsName,item.mallPrice,item.goodsStandard,item.id,item.goodsBrand,1,false)"></i>
         </div>
       </li>
     </ul>
@@ -36,7 +36,8 @@ export default {
       id,
       goodsBrand,
       slogan,
-      qty
+      qty,
+      che
     ) {
       this.$router.push({
         name: "goods",
@@ -48,7 +49,8 @@ export default {
           id,
           goodsBrand,
           slogan,
-          qty
+          qty,
+          che
         }
       });
       this.$store.commit("addlist", {
@@ -59,7 +61,8 @@ export default {
         id,
         goodsBrand,
         slogan,
-        qty
+        qty,
+        che:false
       });
     },
     addcart(bigImg, goodsName, mallPrice, goodsStandard, id, goodsBrand) {
@@ -79,7 +82,8 @@ export default {
           goodsStandard,
           id,
           goodsBrand,
-          qty: 1
+          qty: 1,
+          che:false
         });
       }
     }

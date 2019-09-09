@@ -15,7 +15,7 @@
       <div ref="itemlen" class="cartitem clearfix" v-for="(item,index) in cartlist" :key="item.id">
         <div class="item-check clearfix" >
           <!-- 复选框 -->
-          <input name="type" @click="eckfa" ref="itemcheck" type="checkbox" :checked="chec == true" />
+          <input name="type" @click="eckfa(index)" ref="itemcheck" type="checkbox" :checked="chec == true" />
         </div>
         <div class="item-img">
           <img :src="item.goodsImg" alt />
@@ -96,19 +96,28 @@ export default {
     },
     alleck() {
       this.chec = !this.chec;
+      if(this.chec == true){
+        this.$store.commit('changmapche',true)
+      }
+      if(this.chec == false){
+        this.$store.commit('changmapche',false)
+      }
     },
-    eckfa() {
+    eckfa(index) {
       // 每次点击把数据布尔值修改 然后传入到vuex中
       // vuex筛选布尔值为true的商品
       // 将价格乘以数量然后返回
       console.log(1);
       this.chec = false;
+      this.$store.commit('changeche',index)
     }
   },
   computed: {
+    // 返回购物车商品信息
     cartlist() {
       return this.$store.state.cartlist;
     },
+    // 返回价格
     totalPrice() {
       return this.$store.getters.totalPrice;
     }

@@ -19,8 +19,8 @@
     </header>
     <div class="content mlogin" ref="loginForm">
       <input type="text" placeholder="请输入用户名/手机号/邮箱" v-model="ruleFrom.username" />
-      <input type="text" placeholder="请输入6位以上的密码" v-model="ruleFrom.userPassword" />
-      <div class="hint">请输入登录密码，长度大于等于6位</div>
+      <input type="text" placeholder="建议请输入6位以上的密码" v-model="ruleFrom.userPassword" />
+      <div class="hint">请输入登录密码，建议长度大于等于6位</div>
       <button :class="butcla" @click="gotoReg" @keyup.enter="gotoReg">立即登录</button>
       <div class="log-reg">
         <div class="log-reg-left" @click="goto('reg')">手机快速注册</div>

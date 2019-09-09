@@ -17,15 +17,25 @@ let store = new Vuex.Store({
             //     id: "jq0i23upvu0AUsi0w1O4",
             //     mallPrice: 199,
             //     qty:1,
+            //     che:false
             // }
         ],
         user: [],
-        itemlist: []
+        itemlist: [],
+        
     },
     // 更新state
     getters: {
+        // totalPrice: function (state) {
+        //     return state.cartlist.reduce((prev, item) => {
+        //         return prev + item.mallPrice * item.qty
+        //     }, 0)
+        // },
         totalPrice: function (state) {
-            return state.cartlist.reduce((prev, item) => {
+            let price = state.cartlist.filter(function(item){
+                return item.che == true
+            })
+            return price.reduce((prev, item) => {
                 return prev + item.mallPrice * item.qty
             }, 0)
         }
@@ -40,15 +50,22 @@ let store = new Vuex.Store({
             state.user = [];
             state.user.push(item)
         },
-
-
         addlist(state, item) {
             state.itemlist.push(item)
         },
         clearlist(state) {
             state.itemlist = []
         },
-
+        changeche(state,index){
+            state.cartlist[index].che = !state.cartlist[index].che
+        },
+        changmapche(state,item){
+            state.cartlist.map((ele)=>{
+                ele.che = item 
+                console.log(ele.che);
+                
+            })
+        },
 
         // 删除
         removeItem(state, index) {
