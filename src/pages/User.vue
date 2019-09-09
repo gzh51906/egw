@@ -281,7 +281,7 @@ body {
   position: relative;
   width: 298px;
   height: 100%;
-  /* line-height: 33px; */
+  line-height: 33px;
   text-align: center;
   font-size: 16px;
 }
