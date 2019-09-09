@@ -52,8 +52,8 @@
 export default {
   data() {
     return {
-      logReg:'点击登录/注册用户',
-      btnFlag:0,
+      logReg: "点击登录/注册用户",
+      btnFlag: 0,
       qty: 1,
       topNav: {
         icon: "el-icon-setting",
@@ -205,10 +205,7 @@ export default {
     // let {data} = await this.$axios.get('http://52.78.186.217:8888/user/list', {});
     // this.dataitem = data[0].list
     // console.log(this.dataitem );
-    let data2 = await this.$axios.get(
-      "http://52.78.186.217:8888/home/goodstypeo",
-      {}
-    );
+    let data2 = await this.$axios.get(`${this.$url}/home/goodstypeo`, {});
     data2.data.map(item => {
       item.list.map(self => {
         this.dataitem.push(self);
@@ -217,7 +214,7 @@ export default {
     // 如果user有信息 那么就把它绑定上去
     if (this.$store.state.user.length != 0) {
       this.logReg = this.$store.state.user[0].user;
-      this.topNav.srcUrl = require('../assets/panhu.png');
+      this.topNav.srcUrl = require("../assets/panhu.png");
     }
   },
   mounted() {
@@ -438,8 +435,8 @@ i {
   border-radius: 50%;
   opacity: 0.8;
 }
-.user-t-botm{
+.user-t-botm {
   font-size: 14px;
-  color:yellowgreen;
+  color: yellowgreen;
 }
 </style>

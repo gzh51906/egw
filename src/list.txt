@@ -1,0 +1,95 @@
+卷 DATA 的文件夹 PATH 列表
+卷序列号为 5460-B59C
+E:.
+│  App.vue
+│  list.txt
+│  main.js
+│  
+├─assets
+│      guess_you_like.jpg
+│      logo.png
+│      new.png
+│      not_user.jpg
+│      panhu.png
+│      service.png
+│      strawberry.png
+│      tes.jpg
+│      test.js
+│      today.jpg
+│      top_sale.png
+│      user_bg.png
+│      user_order_01.png
+│      user_order_02.png
+│      user_order_03.png
+│      user_order_04.png
+│      user_order_05.png
+│      user_third_02.png
+│      user_third_03.png
+│      user_third_04.png
+│      user_third_05.png
+│      user_two_01.png
+│      user_two_02.png
+│      user_two_03.png
+│      user_two_04.png
+│      user_two_05.png
+│      
+├─classify
+│      all.vue
+│      apple.vue
+│      cardli.vue
+│      chuwei.vue
+│      fruit.vue
+│      ganhuo.vue
+│      gift.vue
+│      grape.vue
+│      green.vue
+│      hotfruit.vue
+│      jiadian.vue
+│      kiwi.vue
+│      main.vue
+│      mincha.vue
+│      oil.vue
+│      olther.vue
+│      orange.vue
+│      peach.vue
+│      snacks.vue
+│      
+├─components
+│      HelloWorld.vue
+│      
+├─Home
+│      Cardli.vue
+│      Chuwei.vue
+│      Fruit.vue
+│      Ganhuo.vue
+│      Green.vue
+│      Hot.vue
+│      Jiadian.vue
+│      Main.vue
+│      Mincha.vue
+│      Oil.vue
+│      Snacks.vue
+│      
+├─iconfont
+│      font.css
+│      
+├─pages
+│      Card.vue
+│      Cart.vue
+│      Classify.vue
+│      Goods.vue
+│      Home.vue
+│      Login.vue
+│      Mine.vue
+│      Reg.vue
+│      User.vue
+│      
+├─rem
+│      index.js
+│      
+├─routers
+│      index.js
+│      
+└─store
+        index.js
+        

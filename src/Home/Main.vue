@@ -88,7 +88,7 @@ export default {
   async created() {
     this.$store.commit("clearlist");
     let { data: { data } } = await this.$axios.get(
-      "http://52.78.186.217:8888/home/goodsbgt",
+      `${this.$url}/home/goodsbgt`,
       {
         params: {
           id: this.msg.bgurl
@@ -97,7 +97,7 @@ export default {
     );
     this.bg = data.bgImg2;
 
-    let type = await this.$axios.get("http://localhost:8888/home/goodstypes", {
+    let type = await this.$axios.get(`${this.$url}/home/goodstypes`, {
       params: {
         id: this.msg.goodid
       }
