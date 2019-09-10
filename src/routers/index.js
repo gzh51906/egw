@@ -51,7 +51,7 @@ import {
 Vue.use(VueRouter);
 
 let router = new VueRouter({
-    // mode: "history",
+    mode: "history",
     // 是routes
     routes: [{
         name: 'home',

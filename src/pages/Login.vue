@@ -81,6 +81,7 @@ export default {
     },
     // 检查账号密码是否正确
     async gotoReg() {
+<<<<<<< HEAD
 
       let { data } = await this.$axios.post(
         "http://52.78.186.217:8888/user/login",
@@ -89,19 +90,25 @@ export default {
           password: this.ruleFrom.userPassword
         }
       );
+=======
+      let { data } = await this.$axios.post(`${this.$url}/user/login`, {
+        username: this.ruleFrom.username,
+        password: this.ruleFrom.userPassword
+      });
+>>>>>>> 3ce80328a9bce80735bd4f73fd8d92718fc50d84
       if (data.code === 1) {
         // 如果登录成功
-        let user = this.ruleFrom.username
-      // 将用户名保存在vuex
-        this.$store.commit("adduser", {user})
+        let user = this.ruleFrom.username;
+        // 将用户名保存在vuex
+        this.$store.commit("adduser", { user });
         // console.log(this.$store);
-        
+
         // 如果targetUrl有就跳到this.$route.query.targetUrl如果没有的话就跳到/user
-        let targetUrl = this.$route.query.targetUrl || '/user'
+        let targetUrl = this.$route.query.targetUrl || "/user";
         this.$router.push(targetUrl);
 
         // 保存token到本地
-        localStorage.setItem('Authorization',data.data.authorization);
+        localStorage.setItem("Authorization", data.data.authorization);
       } else {
         // console.log(this.ruleFrom.username, this.ruleFrom.userPassword);
         alert("用户名或密码错误");
