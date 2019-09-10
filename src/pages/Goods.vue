@@ -53,8 +53,8 @@
         </el-menu-item>
       </el-menu>
       <div class="buttom-group">
-        <button class="cart" @click="addcart(info.bigImg,info.goodsName,info.mallPrice,info.goodsStandard,info.id,info.goodsBrand,info.qty)">加入购物车</button>
-        <button class="buy" @click="buy(info.bigImg,info.goodsName,info.mallPrice,info.goodsStandard,info.id,info.goodsBrand,info.qty)">立即购买</button>
+        <button class="cart" @click="addcart(info.bigImg,info.goodsName,info.mallPrice,info.goodsStandard,info.id,info.goodsBrand,info.qty,false)">加入购物车</button>
+        <button class="buy" @click="buy(info.bigImg,info.goodsName,info.mallPrice,info.goodsStandard,info.id,info.goodsBrand,info.qty,false)">立即购买</button>
       </div>
     </footer>
   </div>
@@ -121,7 +121,7 @@ export default {
       this.$router.go(-1);
       this.$store.commit("clearlist");
     },
-    addcart(bigImg, goodsName, mallPrice, goodsStandard, id, goodsBrand) {
+    addcart(bigImg, goodsName, mallPrice, goodsStandard, id, goodsBrand,qty,che) {
       let { cartlist } = this.$store.state;
       var hasItem = cartlist.filter(function(item) {
         // 得到一个空数组或者数组
@@ -138,11 +138,12 @@ export default {
           goodsStandard,
           id,
           goodsBrand,
-          qty: 1
+          qty: 1,
+          che
         });
       }
     },
-    buy(bigImg, goodsName, mallPrice, goodsStandard, id, goodsBrand, qty) {
+    buy(bigImg, goodsName, mallPrice, goodsStandard, id, goodsBrand, qty,che) {
       this.addcart(
         bigImg,
         goodsName,
@@ -150,7 +151,8 @@ export default {
         goodsStandard,
         id,
         goodsBrand,
-        qty
+        qty,
+        che
       );
       this.$router.push({ name: "cart" });
     }

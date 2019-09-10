@@ -60,10 +60,10 @@ let store = new Vuex.Store({
             state.cartlist[index].che = !state.cartlist[index].che
         },
         changmapche(state,item){
+            console.log(item);
+            
             state.cartlist.map((ele)=>{
                 ele.che = item 
-                console.log(ele.che);
-                
             })
         },
 
