@@ -19,7 +19,7 @@
     </header>
     <div class="content mlogin" ref="loginForm">
       <input type="text" placeholder="请输入用户名/手机号/邮箱" v-model="ruleFrom.username" />
-      <input type="text" placeholder="建议请输入6位以上的密码" v-model="ruleFrom.userPassword" />
+      <input type="password" placeholder="建议请输入6位以上的密码" v-model="ruleFrom.userPassword" />
       <div class="hint">请输入登录密码，建议长度大于等于6位</div>
       <button :class="butcla" @click="gotoReg" @keyup.enter="gotoReg">立即登录</button>
       <div class="log-reg">
@@ -81,7 +81,6 @@ export default {
     },
     // 检查账号密码是否正确
     async gotoReg() {
-<<<<<<< HEAD
 
       let { data } = await this.$axios.post(
         "http://52.78.186.217:8888/user/login",
@@ -90,12 +89,10 @@ export default {
           password: this.ruleFrom.userPassword
         }
       );
-=======
-      let { data } = await this.$axios.post(`${this.$url}/user/login`, {
-        username: this.ruleFrom.username,
-        password: this.ruleFrom.userPassword
-      });
->>>>>>> 3ce80328a9bce80735bd4f73fd8d92718fc50d84
+      // let { data } = await this.$axios.post(`${this.$url}/user/login`, {
+      //   username: this.ruleFrom.username,
+      //   password: this.ruleFrom.userPassword
+      // });
       if (data.code === 1) {
         // 如果登录成功
         let user = this.ruleFrom.username;

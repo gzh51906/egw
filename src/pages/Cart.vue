@@ -107,7 +107,6 @@ export default {
       // 每次点击把数据布尔值修改 然后传入到vuex中
       // vuex筛选布尔值为true的商品
       // 将价格乘以数量然后返回
-      console.log(1);
       this.chec = false;
       this.$store.commit('changeche',index)
     }

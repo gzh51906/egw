@@ -214,6 +214,7 @@ export default {
       });
     });
     // 如果user有信息 那么就把它绑定上去
+    // localStorage.getItem("Authorization");
     if (this.$store.state.user.length != 0) {
       this.logReg = this.$store.state.user[0].user;
       this.topNav.srcUrl = require("../assets/panhu.png");
@@ -251,7 +252,7 @@ body {
   background: #fff;
 }
 .user-head-c span {
-  font-size: 14px;
+  font-size: 16px;
 }
 .user .user-head .user-head-l {
   position: relative;
@@ -293,6 +294,7 @@ body {
   height: 100%;
   font-size: 20px;
   text-align: center;
+  line-height: 33px;
 }
 /* user 登录 /注册 */
 .user-wrap {
