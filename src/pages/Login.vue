@@ -34,7 +34,7 @@
 export default {
   data() {
     return {
-      butcla:'van-button',
+      butcla: "van-button",
       ruleFrom: {
         username: "",
         userPassword: ""
@@ -81,25 +81,10 @@ export default {
     },
     // 检查账号密码是否正确
     async gotoReg() {
-<<<<<<< HEAD
-
-      let { data } = await this.$axios.post(
-        "http://52.78.186.217:8888/user/login",
-        {
-          username: this.ruleFrom.username,
-          password: this.ruleFrom.userPassword
-        }
-      );
-      // let { data } = await this.$axios.post(`${this.$url}/user/login`, {
-      //   username: this.ruleFrom.username,
-      //   password: this.ruleFrom.userPassword
-      // });
-=======
       let { data } = await this.$axios.post(`${this.$url}/user/login`, {
         username: this.ruleFrom.username,
         password: this.ruleFrom.userPassword
       });
->>>>>>> cxd
       if (data.code === 1) {
         // 如果登录成功
         let user = this.ruleFrom.username;
@@ -232,10 +217,9 @@ body {
   line-height: 43.75px;
   font-size: 14px;
   color: #fff;
-
 }
-.yegren{
-  background:yellowgreen;
+.yegren {
+  background: yellowgreen;
   border: 1px solid yellowgreen;
 }
 .log-reg {
