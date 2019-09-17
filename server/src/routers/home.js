@@ -130,8 +130,8 @@ Router.get("/goodstypes", async (req, res) => {
     res.send(data);
 })
 
-// 删除用户
-Router.delete("/frit", (req, res) => {
+// 删除商品
+Router.delete("/fruit", (req, res) => {
     let {
         id
     } = req.query;
