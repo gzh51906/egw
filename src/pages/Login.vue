@@ -81,6 +81,7 @@ export default {
     },
     // 检查账号密码是否正确
     async gotoReg() {
+<<<<<<< HEAD
 
       let { data } = await this.$axios.post(
         "http://52.78.186.217:8888/user/login",
@@ -93,6 +94,12 @@ export default {
       //   username: this.ruleFrom.username,
       //   password: this.ruleFrom.userPassword
       // });
+=======
+      let { data } = await this.$axios.post(`${this.$url}/user/login`, {
+        username: this.ruleFrom.username,
+        password: this.ruleFrom.userPassword
+      });
+>>>>>>> cxd
       if (data.code === 1) {
         // 如果登录成功
         let user = this.ruleFrom.username;
